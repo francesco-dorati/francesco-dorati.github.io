@@ -1,0 +1,139 @@
+:root {
+  --bg-color: #121212;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  --accent-color: #e0e0e0; /* Clean white/grey accent */
+  --link-color: #8ab4f8;
+  --link-hover: #aecbfa;
+  --color-primary: #8ab4f8;
+  --color-secondary: #c594c5;
+  --color-background: #121212;
+  --color-border: #333333;
+  --color-text: #e0e0e0;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-size-base: 14px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 15px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--link-hover);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+ul {
+  list-style-type: none;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  display: flex;
+}
+
+.prefix {
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.highlight {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.code-block {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid #333;
+}
+
+.blinking-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background-color: var(--accent-color);
+  visibility: hidden;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: visible;
+  }
+}
