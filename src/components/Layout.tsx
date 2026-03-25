@@ -7,42 +7,53 @@ export default function Layout() {
     <div className="container">
       <nav style={{ 
         display: 'flex', 
-        gap: '1.5rem', 
-        marginBottom: '2rem',
-        paddingBottom: '1rem',
-        borderBottom: '1px dashed #6699cc',
+        gap: '2rem',
+        marginBottom: '4rem',
+        paddingTop: '2rem',
         fontFamily: 'var(--font-mono)'
       }}>
-        <Link 
-          to="/" 
-          style={{ 
-            color: location.pathname === '/' ? 'var(--color-primary)' : 'var(--color-text)',
-            textDecoration: 'none',
-            fontWeight: location.pathname === '/' ? 'bold' : 'normal'
-          }}
-        >
-          ~/home
-        </Link>
-        <Link 
-          to="/about" 
-          style={{ 
-            color: location.pathname === '/about' ? 'var(--color-primary)' : 'var(--color-text)',
-            textDecoration: 'none',
-            fontWeight: location.pathname === '/about' ? 'bold' : 'normal'
-          }}
-        >
-          ~/about
-        </Link>
-        <Link 
-          to="/projects" 
-          style={{ 
-            color: location.pathname.startsWith('/projects') ? 'var(--color-primary)' : 'var(--color-text)',
-            textDecoration: 'none',
-            fontWeight: location.pathname.startsWith('/projects') ? 'bold' : 'normal'
-          }}
-        >
-          ~/projects
-        </Link>
+        {[
+          { path: '/', label: 'home' },
+          { path: '/about', label: 'about' },
+          { path: '/projects', label: 'projects' }
+        ].map(link => {
+          const isActive = link.path === '/' 
+            ? location.pathname === '/' 
+            : location.pathname.startsWith(link.path);
+          
+          return (
+            <Link 
+              key={link.path} 
+              to={link.path} 
+              style={{
+                color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                textDecoration: 'none',
+                fontSize: '1rem',
+                transition: 'color 0.2s, opacity 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                opacity: isActive ? 1 : 0.7
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.color = 'var(--text-primary)';
+                e.currentTarget.style.opacity = '1';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.color = isActive ? 'var(--text-primary)' : 'var(--text-muted)';
+                e.currentTarget.style.opacity = isActive ? '1' : '0.7';
+              }}
+            >
+              <span style={{ 
+                color: isActive ? 'var(--color-primary)' : 'transparent', 
+                marginRight: '0.5rem',
+                transition: 'color 0.2s'
+              }}>
+                &gt;_
+              </span>
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
 
       <main>

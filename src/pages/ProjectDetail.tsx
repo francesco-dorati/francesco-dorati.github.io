@@ -17,71 +17,151 @@ export default function ProjectDetail() {
          </Link>
       </div>
 
-      <h1 style={{ color: 'var(--color-primary)', borderBottom: 'none' }}>{project.title} <span className="blinking-cursor"></span></h1>
-      <div className="muted" style={{ fontSize: '1.1em', marginBottom: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-        <span><strong>Role:</strong> {project.role}</span>
-        <span>|</span>
-        <span><strong>Timeline:</strong> {project.date}</span>
+      <div style={{ marginBottom: '2rem', borderBottom: '1px dashed var(--color-border)', paddingBottom: '1.5rem' }}>
+        <h1 style={{ 
+          color: '#ffffff', 
+          borderBottom: 'none', 
+          fontSize: '2.4rem', 
+          margin: '0 0 0.8rem 0',
+          letterSpacing: '-0.5px' 
+        }}>
+          <span style={{ color: '#6699cc', marginRight: '0.6rem', fontFamily: 'var(--font-mono)' }}>&gt;_</span>
+          {project.title} 
+          {' '}
+          <span className="blinking-cursor"></span>
+        </h1>
+        <div style={{ 
+          fontSize: '1.1rem', 
+          color: 'var(--text-secondary)', 
+          display: 'flex', 
+          gap: '1rem', 
+          flexWrap: 'wrap', 
+          alignItems: 'center',
+          fontFamily: 'var(--font-mono)' 
+        }}>
+          <span style={{ color: '#6699cc' }}>{project.company}</span>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <span>{project.date}</span>
+        </div>
       </div>
 
-      {project.link && (
-        <div style={{ marginBottom: '2rem' }}>
-          <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ 
-              border: '1px dashed #fac863', 
-              color: '#fac863', 
-              padding: '0.5rem 1rem', 
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontFamily: 'var(--font-mono)'
-            }}>
-             [External Link / Publication]
-          </a>
-        </div>
-      )}
-
       <div style={{ marginTop: '2rem' }}>
-        <h2>SYSTEM OVERVIEW</h2>
+        <h2>PROJECT OVERVIEW</h2>
         {project.longDescription.map((desc, i) => (
           <p key={i} style={{ marginTop: '1rem', lineHeight: '1.6' }}>{desc}</p>
         ))}
       </div>
 
-      <div style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-        <div>
-          <h2>CORE TECH STACK</h2>
-          <ul style={{ marginTop: '1rem', listStyleType: 'square', paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+      {/* Project Media */}
+      {project.media && project.media.length > 0 && (
+        <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+          {project.media.map((item, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'center' }}>
+              {item.type === 'image' ? (
+                <img 
+                  src={item.url} 
+                  alt={item.description || `${project.title} media ${i + 1}`} 
+                  style={{ width: '100%', maxWidth: '660px', maxHeight: '480px', objectFit: 'contain', borderRadius: '8px', border: '1px solid var(--color-border)' }} 
+                />
+              ) : (
+                <video 
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  src={item.url} 
+                  style={{ width: '100%', maxWidth: '660px', maxHeight: '480px', objectFit: 'contain', borderRadius: '8px', border: '1px solid var(--color-border)' }} 
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              {item.description && (
+                <p style={{ 
+                  color: 'var(--text-secondary)', 
+                  fontStyle: 'italic', 
+                  fontSize: '0.95rem', 
+                  textAlign: 'center',
+                  fontFamily: 'var(--font-mono)' 
+                }}>
+                  {item.description}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* External Link / Publication */}
+      {project.link && (
+        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+          <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ 
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              backgroundColor: 'var(--color-primary)', 
+              color: 'var(--color-background)', 
+              padding: '0.8rem 1.5rem', 
+              borderRadius: '4px',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              fontFamily: 'var(--font-mono)',
+              transition: 'opacity 0.2s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
+            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          >
+             VIEW PUBLICATION &rarr;
+          </a>
+        </div>
+      )}
+
+      <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+        <div style={{ backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #fac863' }}>
+          <h2 style={{ fontSize: '1.3rem', color: '#fac863', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>toolkit</h2>
+          <div style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
             {project.techStack.map((tech, i) => (
-              <li key={i}>{tech}</li>
+              <span key={i} style={{ 
+                backgroundColor: 'rgba(250, 200, 99, 0.1)', 
+                color: '#fac863', 
+                padding: '0.4rem 0.8rem', 
+                borderRadius: '4px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.9rem',
+                border: '1px solid rgba(250, 200, 99, 0.3)'
+              }}>
+                {tech}
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
         
-        <div>
-          <h2>KEY CHALLENGES</h2>
-          <ul style={{ marginTop: '1rem', listStyleType: 'circle', paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+        <div style={{ backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
+          <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>technical hurdles</h2>
+          <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {project.challenges.map((challenge, i) => (
-              <li key={i}>{challenge}</li>
+              <li key={i} style={{ display: 'flex', gap: '0.8rem', alignItems: 'flex-start', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <span style={{ color: '#ec5f67', fontFamily: 'var(--font-mono)' }}>&gt;</span>
+                <span>{challenge}</span>
+              </li>
             ))}
           </ul>
         </div>
       </div>
 
       {project.metrics && (
-         <div style={{ marginTop: '3rem', backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
-            <h2 style={{ borderBottom: 'none', paddingBottom: 0, marginTop: 0, color: '#99c794' }}>RESULTS & METRICS</h2>
-            <ul style={{ marginTop: '1rem', listStyleType: 'disc', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+         <div style={{ marginTop: '2.5rem', backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
+            <h2 style={{ fontSize: '1.3rem', color: '#99c794', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>results & metrics</h2>
+            <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                {project.metrics.map((metric, i) => (
-                 <li key={i}>{metric}</li>
+                 <li key={i} style={{ display: 'flex', gap: '0.8rem', alignItems: 'flex-start', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                   <span style={{ color: '#99c794', fontFamily: 'var(--font-mono)' }}>&gt;</span>
+                   <span>{metric}</span>
+                 </li>
                ))}
             </ul>
          </div>
       )}
-
-      {/* Placeholder for future images/videos */}
-      <div style={{ marginTop: '4rem', padding: '2rem', border: '1px dashed var(--color-border)', textAlign: 'center', opacity: 0.5 }}>
-         <p style={{ fontFamily: 'var(--font-mono)' }}>[ media_placeholder.png ]</p>
-         <p style={{ fontSize: '0.9em', marginTop: '0.5rem' }}>Awaiting images or video links</p>
-      </div>
     </div>
   );
 }

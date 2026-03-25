@@ -6,7 +6,7 @@ export default function Home() {
       <header className="section">
         <h1>Hi, I'm Francesco <span className="blinking-cursor"></span></h1>
         <p>
-          <span className="highlight">🛠️ Robotics Engineer</span> focusing on Physical AI & Reinforcement Learning
+          <span className="highlight">🛠️ Computer Engineer</span> focusing on <span className="highlight">Physical AI</span> & <span className="highlight">Reinforcement Learning</span>
         </p>
         <p>🎓 MSc Computer Science and Engineering @ Politecnico di Milano</p>
         <p>🇮🇹 Based in Milan, Italy</p>
