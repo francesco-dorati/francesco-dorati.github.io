@@ -4,7 +4,19 @@ import { projectsData } from '../data/projects';
 export default function Projects() {
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in' }}>
-      <h1>Projects & Research <span className="blinking-cursor"></span></h1>
+      <h1 style={{ 
+        color: 'var(--text-primary)', 
+        borderBottom: 'none', 
+        fontSize: '2.4rem', 
+        margin: '0 0 1rem 0',
+        letterSpacing: '-0.5px',
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+        <span style={{ marginRight: '0.6rem', fontWeight: 'normal' }}>~/</span>
+        Projects & Research
+        <span className="blinking-cursor" style={{ marginLeft: '0.5rem' }}></span>
+      </h1>
       
       <p style={{ marginTop: '1rem', marginBottom: '3rem', opacity: 0.8, maxWidth: '650px', lineHeight: '1.6' }}>
         An in-depth look at the technical systems and robotics platforms I have contributed to:

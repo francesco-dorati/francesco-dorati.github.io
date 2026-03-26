@@ -13,7 +13,7 @@ export default function ProjectDetail() {
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in' }}>
       <div style={{ marginBottom: '2rem' }}>
          <Link to="/projects" className="muted" style={{ textDecoration: 'none', fontFamily: 'var(--font-mono)' }}>
-           ← cd ..
+           ← cd ../projects
          </Link>
       </div>
 

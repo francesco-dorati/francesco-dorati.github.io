@@ -137,3 +137,35 @@ li {
     visibility: visible;
   }
 }
+
+.films-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .films-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.top-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-top: 1.5rem;
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .top-nav {
+    gap: 2rem;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+    justify-content: flex-start;
+  }
+}

@@ -5,16 +5,11 @@ export default function Layout() {
 
   return (
     <div className="container">
-      <nav style={{ 
-        display: 'flex', 
-        gap: '2rem',
-        marginBottom: '4rem',
-        paddingTop: '2rem',
-        fontFamily: 'var(--font-mono)'
-      }}>
+      <nav className="top-nav">
         {[
           { path: '/', label: 'home' },
           { path: '/about', label: 'about' },
+          { path: '/learning', label: 'learning' },
           { path: '/projects', label: 'projects' }
         ].map(link => {
           const isActive = link.path === '/' 
