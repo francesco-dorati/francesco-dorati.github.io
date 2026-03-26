@@ -23,9 +23,11 @@ export interface Degree {
   id: string;
   university: string;
   degree: string;
+  subtitle?: string;
   duration: string;
   location: string;
   description: string;
+  isExchange?: boolean;
   courses: Course[];
   projects: EducationProject[];
   activities?: EducationActivity[];
@@ -33,36 +35,101 @@ export interface Degree {
 
 export const educationData: Degree[] = [
   {
-    id: 'msc-compuer-engineering',
+    id: 'msc-computer-engineering',
     university: 'Polytechnic University of Milan',
-    degree: 'MSc in Computer Engineering (Artificial Intelligence)',
+    degree: 'MSc in Computer Engineering',
+    subtitle: 'Artificial Intelligence Specialization',
     duration: '2025 - Present',
     location: 'Milan, Italy',
-    description: 'Advanced studies in autonomous mechanical systems, non-linear control theory, and artificial intelligence.',
+    description: 'Advanced studies in artificial intelligence, autonomous systems and robotics, focusing on intelligent decision-making, multiagent systems, and real-world AI applications across robotics, computer vision, and autonomous technologies.',
     courses: [
-      { name: '⚙️ Advanced Control Systems', description: 'Theoretical and practical exploration of non-linear control algorithms, predictive control (MPC), and robust feedback mechanisms.' },
-      { name: '🧠 Artificial Intelligence', description: 'Deep dive into modern AI paradigms, including reinforcement learning agents, neural networks, and perception models.' },
-      { name: '🦾 Robotics 2', description: 'Advanced kinematics, rigid body dynamics, and trajectory optimization for high-DoF manipulators and mobile platforms.' }
+      { name: '👥 Multiagent Systems', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
+    ],
+    projects: [
+
+    ],
+    activities: [
+      { 
+        name: 'Project Team Member - Automation Engineering Association (AEA)', 
+        subtitle: 'Univeristy Association', 
+        description: 'Contributed to robotics projects and participated in workshops within a university association.',
+        color: 'red'
+      },
+      { 
+        name: 'Project Team Member - PoliMi Data Science Association (PMDS) ', 
+        subtitle: 'Univeristy Association', 
+        description: 'Contributed to ML/AI projects and participated in workshops within a university association.',
+        color: 'red'
+      },
+      { 
+        name: 'Startup Bootcamp', 
+        subtitle: 'Workshop', 
+        description: 'Short program on innovation and entrepreneurship, covering intellectual property, business model validation, market strategies, and startup ecosystem dynamics.',
+        color: 'cyan'
+      },
+      { 
+        name: 'Reply Innovator Bootcamp', 
+        subtitle: 'Company Visit & Workshop', 
+        description: 'Hands-on bootcamp with Reply on innovation, teamwork, and solving real industrial problems.',
+        color: 'cyan'
+      },
+    ]
+  },
+  {
+    id: 'exchange-upc',
+    university: 'Polytechnic University of Catalunya',
+    degree: 'Exchange - MSc in Artificial Intelligence',
+    duration: 'Feb 2026 - Jun 2026',
+    location: 'Barcelona, Spain',
+    isExchange: true, 
+    description: 'Advanced studies in artificial intelligence, autonomous systems and robotics, focusing on intelligent decision-making, multiagent systems, and real-world AI applications across robotics, computer vision, and autonomous technologies.',
+    courses: [
+      { name: '🧠 Machine Learning', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
+      { name: '👁️ Computer Vision', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
+      { name: '🗣️ Advanced Human Language Technologies', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
+      { name: '🖥️ Advanced Processor Architecture', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
     ],
     projects: [
       {
-        title: 'FALCO Drone Integration',
-        type: 'Master Thesis',
-        year: '2024 - 2025',
-        description: 'Designed and simulated an autonomous drone capable of obstacle avoidance in unstructured environments.',
-        technologies: ['ROS 2', 'C++', 'Python', 'Gazebo'],
-        grade: '110/110 cum laude'
-      }
+        title: 'Computer Vision Project',
+        type: 'Computer Vision',
+        year: '2026',
+        description: '...',
+        technologies: [''],
+        grade: '-'
+      },
+      {
+        title: 'Machine Learning Project',
+        type: 'Machine Learning',
+        year: '2026',
+        description: '...',
+        technologies: [''],
+        grade: '-'
+      },
+      {
+        title: 'AHLT Project',
+        type: 'Advanced Human Language Technologies',
+        year: '2026',
+        description: '...',
+        technologies: [''],
+        grade: '-'
+      },
+      {
+        title: 'Novel L1 Cache Data Prefetcher',
+        type: 'Advanced Processor Architecture',
+        year: '2026',
+        description: '...',
+        technologies: ['ChampSim'],
+        grade: '-'
+      },
     ],
-    activities: [
-      { name: 'Robotics Club Lead', subtitle: 'Polytechnic University of Milan | 2024 - 2025', description: 'Organized workshops on drone autonomy and mentored junior engineering students.' },
-      { name: 'Hackathon Finalist', subtitle: 'EU AI & Robotics Hackathon | 2024', description: 'Placed Top 3 out of 50 teams in the highly competitive EU AI & Robotics hackathon.' }
-    ]
+    activities: []
   },
   {
     id: 'bsc-computer-engineering',
     university: 'Polytechnic University of Milan',
     degree: 'BSc in Computer Engineering',
+    // subtitle: 'Final Grade: 100/110',
     duration: '2022 - 2025',
     location: 'Milan, Italy',
     description: 'Foundational coursework in computer science architecture, software engineering, and embedded firmware systems.',
@@ -112,9 +179,9 @@ export const educationData: Degree[] = [
     ],
     activities: [
       { 
-        name: 'Project Team Member - AEA PoliMi', 
+        name: 'Project Team Member - Automation Engineering Association (AEA)', 
         subtitle: 'Univeristy Association', 
-        description: 'Contributed to engineering projects and participated in workshops within a university association.',
+        description: 'Contributed to robotics projects and participated in workshops within a university association.',
         color: 'red'
       },
       { 
@@ -152,48 +219,75 @@ export interface ProgramActivity {
 
 export interface ProgramProject {
   title: string;
+  subtitle?: string;
   description: string;
+}
+
+export interface TimelineEntry {
+  date: string;
+  title: string;
+  location?: string;
+  description?: string;
 }
 
 export interface Program {
   id: string;
   name: string;
-  role: string;
+  institution: string;
   duration: string;
   location: string;
   description: string;
-  activities: ProgramActivity[];
-  projects: ProgramProject[];
+  shortDescription: string;
+  website?: string;
+  image?: string;
+  timeline?: TimelineEntry[];
+  activities?: ProgramActivity[];
+  projects?: ProgramProject[];
 }
 
 export const programs: Program[] = [
   {
     id: 'unitech',
     name: 'UNITECH International Program',
-    role: 'cohort 25',
+    institution: 'UNITECH International Society',
     duration: '2024 - 2026',
     location: 'Multiple Locations (Europe)',
-    description: 'An exclusive academic network integrating top European engineering talent with multinational corporate partners, focusing on tech leadership and sustainability.',
-    activities: [
-      { name: 'Corporate Case Studies', description: 'Solved real-world technical algorithms and business optimization challenges globally.' },
-      { name: 'Leadership & Seminars', description: 'Participated in extensive cross-discipline seminars honing product architecture.' }
+    website: 'https://www.unitech-international.org/',
+    description: 'International leadership and mobility programme for STEM students. Combines a semester of academic exchange at a partner university, an international corporate internship, and three intensive leadership and soft‑skills modules. Includes professional coaching, networking with global companies, and financial support to cover mobility and internship costs. Graduates join a large alumni network of engineers and industry partners.',
+    shortDescription: 'Leadership development programme combining academic exchange, international internship, and professional coaching modules',
+    image: '/programs/unitech/unitech-2.JPG',
+    timeline: [
+      { date: 'Sep 2025', title: 'Start-Up Week', location: 'Lyon, France', description: 'Introductory module bringing the new cohort together for team activities, leadership and business skills exercises, presentations, and discussions with the UNITECH network.' },
+      { date: 'Sep 2025 - Jan 2026', title: 'Case Study Preparation', location: 'Milan, Italy', description: 'Worked with cohort members on a case study provided by Omya, analyzing threats and opportunities of specific EU legislation for the company.' },
+      { date: 'Jan 2026', title: 'Mid Term Week', location: 'Helsinki, Finland', description: 'Module focused on finalizing the case study and preparing presentations for Corporate Partners, with workshops on presentation skills and stress management.' },
+      { date: 'Feb 2026 - Jun 2026', title: 'Academic Exchange', location: 'Barcelona, Spain', description: 'Academic exchange at a partner university in Barcelona.' },
+      { date: 'Sep 2026', title: 'End-of-Year Week', location: 'Barcelona, Spain', description: 'Final module focused on preparing for the transition to professional life through career‑oriented activities, peer workshops, coaching, and strengthening professional and leadership skills.' },
+      { date: 'Next', title: 'Internship', location: 'TBD', description: 'Currently looking for an internship for September 2026.' }
     ],
+
     projects: [
-      { title: 'Sustainability Innovation Initiative', description: 'Collaborated on cross-disciplinary technical roadmaps focusing on autonomous manufacturing frameworks.' }
+      { 
+        title: 'Does the Critical Raw Materials Act (CRMA) Present any Opportunities or Threats for Omya?', 
+        subtitle: 'Case Study',
+        description: 'Case study analyzing the opportunities and threats of the Critical Raw Materials Act (CRMA) for Omya, including regulatory implications and strategic recommendations for the company. Proposed expansion into two promising materials and explored potential EU startup partners for collaboration.' 
+      }
     ]
   },
   {
     id: 'tef',
     name: 'TEF Ingition Program',
-    role: 'Tech European Foundation',
+    institution: 'Tech European Foundation',
     duration: 'Fall 2025',
     location: 'Milan, Italy',
-    description: 'Intensive short-term research placement focusing on experimental autonomous systems and low-level firmware integration.',
-    activities: [
-      { name: 'Autonomous Navigation Algorithms', description: 'Explored multi-node SLAM mapping pipelines and stereo camera visual approximations.' }
-    ],
+    website: 'https://tef.tech/',
+    description: 'Intensive 7‑week student entrepreneurship program by the Tech Europe Foundation in collaboration with Università Bocconi and Politecnico di Milano. It supports early‑stage ideas with training, mentorship from experienced founders, and practical tools to develop a business concept. Received a €2,000 grant and the chance to pitch at a final Demo Day in front of professionals and investors.  ',
+    shortDescription: '7‑week student program to test startup ideas with mentorship, funding, workshops, and a demo day to help launch real startups.',
     projects: [
-      { title: 'Experimental Firmware Sandbox', description: 'Restructured the real-time IMU hardware processing loop mapped to an untethered autonomous rig.' }
+      { 
+        title: 'Organic Home Intelligence', 
+        subtitle: 'Startup Idea',
+        description: 'Privacy-first home automation ecosystem that runs 100% locally. Leveraging a multimodal AI pipeline that combines IR computer vision with localized LLMs to detect human behaviors and context.' 
+      }
     ]
   }
 ];

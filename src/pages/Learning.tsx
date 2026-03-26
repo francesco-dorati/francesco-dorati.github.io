@@ -34,33 +34,55 @@ export default function Learning() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {educationData.map(degree => (
             <Link key={degree.id} to={`/education/${degree.id}`} style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.02)',
+              backgroundColor: degree.isExchange ? 'rgba(255, 255, 255, 0.01)' : 'rgba(255, 255, 255, 0.02)',
               border: '1px solid rgba(255, 255, 255, 0.05)',
               borderRadius: '8px',
-              padding: '1.5rem',
+              padding: degree.isExchange ? '1rem 1.5rem' : '1.5rem',
+              marginLeft: degree.isExchange ? '2.5rem' : '0',
+              marginTop: degree.isExchange ? '-0.8rem' : '0',
               textDecoration: 'none',
               transition: 'transform 0.2s, borderColor 0.2s',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.8rem'
+              gap: '0.6rem',
+              position: 'relative'
             }}
             onMouseOver={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.borderColor = 'rgba(236, 95, 103, 0.3)';
+              e.currentTarget.style.borderColor = '#ec5f67';
             }}
             onMouseOut={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
             }}>
+              {degree.isExchange && (
+                <div style={{ 
+                  position: 'absolute', 
+                  left: '-1.5rem', 
+                  top: '50%', 
+                  width: '1rem', 
+                  height: '1px', 
+                  backgroundColor: 'rgba(236, 95, 103, 0.3)',
+                  display: 'none' 
+                }} />
+              )}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '1.15rem' }}>{degree.degree}</strong>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  {degree.isExchange && <span style={{ color: '#ec5f67', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>↳</span>}
+                  <strong style={{ color: 'var(--text-primary)', fontSize: degree.isExchange ? '1.05rem' : '1.15rem' }}>{degree.degree}</strong>
+                </div>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{degree.duration}</span>
               </div>
-              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+              {degree.subtitle && (
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '-0.2rem', marginLeft: degree.isExchange ? '1.2rem' : '0' }}>
+                  {degree.subtitle}
+                </div>
+              )}
+              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: degree.isExchange ? '0.9rem' : '0.95rem', marginLeft: degree.isExchange ? '1.2rem' : '0' }}>
                 <span style={{ color: '#fac863' }}>@</span> {degree.university}
               </p>
-              <div style={{ color: '#ec5f67', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                VIEW COURSEWORK & PROJECTS <span>&rarr;</span>
+              <div style={{ color: '#ec5f67', fontFamily: 'var(--font-mono)', fontSize: degree.isExchange ? '0.8rem' : '0.9rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: degree.isExchange ? '1.2rem' : '0' }}>
+                VIEW EXCHANGE DETAILS <span>&rarr;</span>
               </div>
             </Link>
           ))}
@@ -99,10 +121,13 @@ export default function Learning() {
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{prog.duration}</span>
               </div>
               <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                <span style={{ color: '#fac863' }}>@</span> {prog.role} <span style={{ opacity: 0.5, margin: '0 0.5rem' }}>|</span> {prog.location}
+                <span style={{ color: '#fac863' }}>@</span> {prog.institution} <span style={{ opacity: 0.5, margin: '0 0.5rem' }}>|</span> {prog.location}
+              </p>
+              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', opacity: 0.85 }}>
+                {prog.shortDescription}
               </p>
               <div style={{ color: '#fac863', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                VIEW DETAILS & CONTRIBUTIONS <span>&rarr;</span>
+                VIEW DETAILS <span>&rarr;</span>
               </div>
             </Link>
           ))}
@@ -152,10 +177,10 @@ export default function Learning() {
       {/* 4. Learning Philosophy */}
       <div style={{ 
         marginBottom: '4rem',
-        backgroundColor: 'rgba(250, 200, 99, 0.05)',
-        borderLeft: '4px solid #fac863',
+        backgroundColor: 'rgba(250, 200, 99, 0.03)',
+        border: '1px solid rgba(250, 200, 99, 0.15)',
         padding: '2rem',
-        borderRadius: '0 8px 8px 0'
+        borderRadius: '8px'
       }}>
         <h3 style={{ fontSize: '1.2rem', color: '#fac863', margin: '0 0 1rem 0', fontFamily: 'var(--font-mono)' }}>
           <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem', opacity: 0.5 }}>//</span>

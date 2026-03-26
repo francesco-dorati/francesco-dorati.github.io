@@ -44,12 +44,11 @@ export default function ProgramDetail() {
           fontSize: '2.2rem', 
           margin: '0 0 1rem 0',
           letterSpacing: '-0.5px',
-          display: 'flex',
-          alignItems: 'center'
+          lineHeight: '1.2'
         }}>
-          <span style={{ color: '#fac863', marginRight: '0.6rem', fontWeight: 'normal' }}>&gt;_</span>
+          <span style={{ color: 'var(--terminal-blue)', marginRight: '0.6rem', fontWeight: 'normal' }}>&gt;_</span>
           {program.name}
-          <span className="blinking-cursor" style={{ marginLeft: '0.5rem' }}></span>
+          <span className="blinking-cursor" style={{ marginLeft: '0.5rem', display: 'inline-block', verticalAlign: 'baseline' }}></span>
         </h1>
         <div style={{ 
           fontFamily: 'var(--font-mono)', 
@@ -60,7 +59,35 @@ export default function ProgramDetail() {
           gap: '1rem',
           flexWrap: 'wrap'
         }}>
-          <span><span style={{ color: '#fac863' }}>@</span> <span style={{ color: 'var(--text-primary)' }}>{program.role}</span></span>
+          <span>
+            <span style={{ color: '#fac863' }}>@ </span> 
+            {program.website ? (
+              <a 
+                href={program.website} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ 
+                  color: 'var(--text-primary)', 
+                  textDecoration: 'none',
+                  borderBottom: '1px solid transparent',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = '#fac863';
+                  e.currentTarget.style.borderBottom = '1px solid #fac863';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                  e.currentTarget.style.borderBottom = '1px solid transparent';
+                }}
+              >
+                {program.institution}
+              </a>
+            ) : (
+              <span style={{ color: 'var(--text-primary)' }}>{program.institution}</span>
+            )}
+          </span>
           <span style={{ opacity: 0.3 }}>|</span> 
           <span>{program.duration}</span>
           <span style={{ opacity: 0.3 }}>|</span> 
@@ -69,12 +96,60 @@ export default function ProgramDetail() {
       </div>
 
       {/* Intro Description */}
-      <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: '4rem' }}>
+      <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--text-secondary)', marginBottom: program.image ? '2rem' : '4rem' }}>
         {program.description}
       </p>
 
+      {/* Optional Program Image */}
+      {program.image && (
+        <div style={{ marginBottom: '4rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+          <img src={program.image} alt={program.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+      )}
+
+      {/* Program Timeline */}
+      {program.timeline && program.timeline.length > 0 && (
+        <div style={{ marginBottom: '5rem' }}>
+          <h2 style={{ fontSize: '1.3rem', color: '#face63', margin: '0 0 2rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> PROGRAM JOURNEY
+          </h2>
+          <div style={{ position: 'relative', borderLeft: '1px dashed rgba(255,255,255,0.1)', marginLeft: '0.6rem', paddingLeft: '2.5rem' }}>
+            {program.timeline.map((item, i) => (
+              <div key={i} style={{ position: 'relative', marginBottom: '2.5rem' }}>
+                <div style={{ 
+                  position: 'absolute', 
+                  left: '-2.95rem', 
+                  top: '0.35rem',
+                  width: '0.8rem', 
+                  height: '0.8rem', 
+                  borderRadius: '50%', 
+                  backgroundColor: 'var(--bg-color)',
+                  border: '2px solid #fac863',
+                  boxShadow: '0 0 8px rgba(250, 200, 99, 0.2)',
+                  zIndex: 2
+                }} />
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', color: '#fac863', fontSize: '0.9rem', fontWeight: 600 }}>{item.date}</span>
+                    <strong style={{ color: 'var(--text-primary)', fontSize: '1.1rem' }}>{item.title}</strong>
+                    {item.location && (
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        <span style={{ opacity: 0.5 }}>@</span> {item.location}
+                      </span>
+                    )}
+                  </div>
+                  {item.description && (
+                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{item.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Activities Grid */}
-      {program.activities.length > 0 && (
+      {program.activities && program.activities.length > 0 && (
         <div style={{ marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#5fb3b3', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> KEY ENGAGEMENTS
@@ -99,7 +174,7 @@ export default function ProgramDetail() {
             ))}
           </div>
           
-          {program.activities.length > 4 && (
+          {program.activities && program.activities.length > 4 && (
             <button 
               onClick={() => setShowAllActivities(!showAllActivities)}
               style={{
@@ -126,28 +201,32 @@ export default function ProgramDetail() {
                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
               }}
             >
-              {showAllActivities ? '- COLLAPSE LIST' : `+ VIEW ALL ENGAGEMENTS (${program.activities.length})`}
+              {showAllActivities ? '- COLLAPSE LIST' : `+ VIEW ALL ENGAGEMENTS (${program.activities?.length || 0})`}
             </button>
           )}
         </div>
       )}
 
       {/* Projects List */}
-      {program.projects.length > 0 && (
+      {program.projects && program.projects.length > 0 && (
         <div>
-          <h2 style={{ fontSize: '1.3rem', color: '#fac863', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> CONTRIBUTIONS
+          <h2 style={{ fontSize: '1.3rem', color: 'var(--terminal-blue)', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> RELATED PROJECTS
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {program.projects.map((proj, i) => (
                <div key={i} style={{ 
-                 borderLeft: '4px solid #fac863', 
-                 paddingLeft: '1.5rem',
-                 backgroundColor: 'rgba(250, 200, 99, 0.05)',
+                 border: '1px solid rgba(255, 255, 255, 0.05)', 
+                 backgroundColor: 'rgba(138, 180, 248, 0.03)',
                  padding: '1.5rem',
-                 borderRadius: '0 8px 8px 0'
+                 borderRadius: '8px'
                }}>
-                 <strong style={{ color: 'var(--text-primary)', display: 'block', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{proj.title}</strong>
+                 <strong style={{ color: 'var(--text-primary)', display: 'block', fontSize: '1.1rem', marginBottom: proj.subtitle ? '0.2rem' : '0.5rem' }}>{proj.title}</strong>
+                 {proj.subtitle && (
+                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem' }}>
+                     {proj.subtitle}
+                   </div>
+                 )}
                  <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: '1.6' }}>{proj.description}</p>
                </div>
             ))}

@@ -44,13 +44,17 @@ export default function EducationDetail() {
           fontSize: '2.2rem', 
           margin: '0 0 1rem 0',
           letterSpacing: '-0.5px',
-          display: 'flex',
-          alignItems: 'center'
+          lineHeight: '1.2'
         }}>
-          <span style={{ color: 'var(--color-primary)', marginRight: '0.6rem', fontWeight: 'normal' }}>&gt;_</span>
+          <span style={{ color: 'var(--terminal-blue)', marginRight: '0.6rem', fontWeight: 'normal' }}>&gt;_</span>
           {degree.degree}
-          <span className="blinking-cursor" style={{ marginLeft: '0.5rem' }}></span>
+          <span className="blinking-cursor" style={{ marginLeft: '0.5rem', display: 'inline-block', verticalAlign: 'baseline' }}></span>
         </h1>
+        {degree.subtitle && (
+          <div style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '1.05rem', marginBottom: '1.5rem', marginTop: '-0.5rem', opacity: 0.8 }}>
+            {degree.subtitle}
+          </div>
+        )}
         <div style={{ 
           fontFamily: 'var(--font-mono)', 
           fontSize: '0.95rem', 
@@ -136,17 +140,16 @@ export default function EducationDetail() {
       {/* Projects List */}
       {degree.projects.length > 0 && (
         <div>
-          <h2 style={{ fontSize: '1.3rem', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+          <h2 style={{ fontSize: '1.3rem', color: 'var(--terminal-red)', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> ACADEMIC PROJECTS
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {degree.projects.map((proj, i) => (
                <div key={i} style={{ 
-                 borderLeft: '4px solid #ec5f67', 
-                 paddingLeft: '1.5rem',
-                 backgroundColor: 'rgba(236, 95, 103, 0.05)',
-                 padding: '1.5rem',
-                 borderRadius: '0 8px 8px 0'
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  backgroundColor: 'rgba(236, 95, 103, 0.03)',
+                  padding: '1.5rem',
+                  borderRadius: '8px'
                }}>
                  <strong style={{ color: 'var(--text-primary)', display: 'block', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{proj.title}</strong>
                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -205,9 +208,8 @@ export default function EducationDetail() {
                 <div key={i} style={{ 
                   backgroundColor: 'rgba(255, 255, 255, 0.02)', 
                   border: '1px solid rgba(255, 255, 255, 0.05)', 
-                  borderTop: `3px solid ${accentColor}`,
                   padding: '1.5rem', 
-                  borderRadius: '4px',
+                  borderRadius: '8px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.8rem',
