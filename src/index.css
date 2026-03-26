@@ -13,6 +13,14 @@
   --color-text: #e0e0e0;
   --font-mono: 'JetBrains Mono', monospace;
   --font-size-base: 14px;
+
+  /* Terminal Named Colors */
+  --terminal-yellow: #fac863;
+  --terminal-magenta: #c594c5;
+  --terminal-blue: #8ab4f8;
+  --terminal-cyan: #5fb3b3;
+  --terminal-red: #ec5f67;
+  --terminal-green: #99c794;
 }
 
 @media (min-width: 768px) {

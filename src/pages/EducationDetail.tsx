@@ -136,7 +136,7 @@ export default function EducationDetail() {
       {/* Projects List */}
       {degree.projects.length > 0 && (
         <div>
-          <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+          <h2 style={{ fontSize: '1.3rem', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> ACADEMIC PROJECTS
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -179,6 +179,82 @@ export default function EducationDetail() {
                  )}
                </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Extracurricular Activities */}
+      {degree.activities && degree.activities.length > 0 && (
+        <div style={{ marginTop: '4rem' }}>
+          <h2 style={{ fontSize: '1.3rem', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> OTHER ACTIVITIES
+          </h2>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
+            gap: '1.5rem' 
+          }}>
+            {degree.activities.map((act, i) => {
+              const accentColor = act.color 
+                ? (['yellow', 'magenta', 'blue', 'cyan', 'red', 'green'].includes(act.color) 
+                    ? `var(--terminal-${act.color})` 
+                    : act.color)
+                : 'var(--terminal-magenta)';
+                
+              return (
+                <div key={i} style={{ 
+                  backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+                  border: '1px solid rgba(255, 255, 255, 0.05)', 
+                  borderTop: `3px solid ${accentColor}`,
+                  padding: '1.5rem', 
+                  borderRadius: '4px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.8rem',
+                  position: 'relative',
+                  transition: 'transform 0.2s, backgroundColor 0.2s',
+                  cursor: 'default'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+                }}>
+                  {act.subtitle && (
+                    <div style={{ 
+                      fontFamily: 'var(--font-mono)', 
+                      fontSize: '0.75rem', 
+                      color: accentColor,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      opacity: 0.9
+                    }}>
+                      <span style={{ opacity: 0.5 }}>[</span>
+                      <span style={{ textTransform: 'uppercase', letterSpacing: '0.5px' }}>{act.subtitle}</span>
+                      <span style={{ opacity: 0.5 }}>]</span>
+                    </div>
+                  )}
+                  
+                  <strong style={{ color: 'var(--text-primary)', fontSize: '1.1rem', lineHeight: '1.4' }}>{act.name}</strong>
+                  
+                  {act.description && (
+                    <p style={{ 
+                      margin: 0, 
+                      color: 'var(--text-secondary)', 
+                      fontSize: '0.9rem', 
+                      lineHeight: '1.6',
+                      opacity: 0.9
+                    }}>
+                      {act.description}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

@@ -12,6 +12,13 @@ export interface EducationProject {
   grade?: string;
 }
 
+export interface EducationActivity {
+  name: string;
+  subtitle?: string;
+  description?: string;
+  color?: string;
+}
+
 export interface Degree {
   id: string;
   university: string;
@@ -21,6 +28,7 @@ export interface Degree {
   description: string;
   courses: Course[];
   projects: EducationProject[];
+  activities?: EducationActivity[];
 }
 
 export const educationData: Degree[] = [
@@ -45,6 +53,10 @@ export const educationData: Degree[] = [
         technologies: ['ROS 2', 'C++', 'Python', 'Gazebo'],
         grade: '110/110 cum laude'
       }
+    ],
+    activities: [
+      { name: 'Robotics Club Lead', subtitle: 'Polytechnic University of Milan | 2024 - 2025', description: 'Organized workshops on drone autonomy and mentored junior engineering students.' },
+      { name: 'Hackathon Finalist', subtitle: 'EU AI & Robotics Hackathon | 2024', description: 'Placed Top 3 out of 50 teams in the highly competitive EU AI & Robotics hackathon.' }
     ]
   },
   {
@@ -95,7 +107,39 @@ export const educationData: Degree[] = [
         year: '2025',
         description: 'Designed a hardware module in VHDL to apply a differential filter to data streams in memory. The system processes 8-bit signed words, alternating between 3rd-order and 5th-order filters based on a memory-mapped configuration.',
         technologies: ['VHDL', 'Vivado', 'FPGA Design Principles', 'Finite State Machines (FSM)'],
-        grade: '30/30'
+        grade: '28/30'
+      },
+    ],
+    activities: [
+      { 
+        name: 'Project Team Member - AEA PoliMi', 
+        subtitle: 'Univeristy Association', 
+        description: 'Contributed to engineering projects and participated in workshops within a university association.',
+        color: 'red'
+      },
+      { 
+        name: 'Best Freshmen Award Winner', 
+        subtitle: 'Merit-Based Scholarship', 
+        description: 'Received a €1,000 academic prize for remarkable performance during the first year of studies.',
+        color: 'yellow'
+      },
+      { 
+        name: 'Elements of Entrepeneurship', 
+        subtitle: 'Elective Course', 
+        description: 'Introduction to business basics, including project management, finance, and key soft skills for companies and startups.',
+        color: 'cyan'
+      },
+      { 
+        name: 'Startup 101', 
+        subtitle: 'Elective Course', 
+        description: 'Hands-on course on building a startup, from idea to testing, using tools like the business model canvas.',
+        color: 'cyan'
+      },
+      { 
+        name: 'ABB Innovator Bootcamp', 
+        subtitle: 'Company Visit & Workshop', 
+        description: 'Hands-on bootcamp with ABB on innovation, teamwork, and solving real industrial problems.',
+        color: 'cyan'
       },
     ]
   }
@@ -139,11 +183,11 @@ export const programs: Program[] = [
     ]
   },
   {
-    id: 'summer-exchange',
-    name: 'Research Exchange Program',
-    role: 'Visiting Researcher',
-    duration: 'Summer 2023',
-    location: 'Helsinki, Finland',
+    id: 'tef',
+    name: 'TEF Ingition Program',
+    role: 'Tech European Foundation',
+    duration: 'Fall 2025',
+    location: 'Milan, Italy',
     description: 'Intensive short-term research placement focusing on experimental autonomous systems and low-level firmware integration.',
     activities: [
       { name: 'Autonomous Navigation Algorithms', description: 'Explored multi-node SLAM mapping pipelines and stereo camera visual approximations.' }
