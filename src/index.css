@@ -177,3 +177,37 @@ li {
     justify-content: flex-start;
   }
 }
+
+.publication-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.publication-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .publication-card {
+    flex-direction: column;
+    gap: 1rem !important;
+  }
+
+  .publication-info {
+    flex-direction: column;
+    gap: 0.8rem !important;
+  }
+
+  .publication-info span {
+    margin-top: 0 !important;
+  }
+
+  .publication-year {
+    margin-top: 0 !important;
+  }
+}

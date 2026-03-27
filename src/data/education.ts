@@ -36,7 +36,7 @@ export interface Degree {
 export const educationData: Degree[] = [
   {
     id: 'msc-computer-engineering',
-    university: 'Polytechnic University of Milan',
+    university: 'Polytechnic University of Milan (PoliMi)',
     degree: 'MSc in Computer Engineering',
     subtitle: 'Artificial Intelligence Specialization',
     duration: '2025 - Present',
@@ -77,57 +77,57 @@ export const educationData: Degree[] = [
   },
   {
     id: 'exchange-upc',
-    university: 'Polytechnic University of Catalunya',
+    university: 'Polytechnic University of Catalunya (UPC)',
     degree: 'Exchange - MSc in Artificial Intelligence',
     duration: 'Feb 2026 - Jun 2026',
     location: 'Barcelona, Spain',
     isExchange: true, 
-    description: 'Advanced studies in artificial intelligence, autonomous systems and robotics, focusing on intelligent decision-making, multiagent systems, and real-world AI applications across robotics, computer vision, and autonomous technologies.',
+    description: '',
     courses: [
-      { name: '🧠 Machine Learning', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
-      { name: '👁️ Computer Vision', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
-      { name: '🗣️ Advanced Human Language Technologies', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
-      { name: '🖥️ Advanced Processor Architecture', description: 'Autonomous agents, distributed intelligent systems, agent interaction, and real-world applications.' },
+      { name: '🧠 Machine Learning', description: 'Supervised and unsupervised methods, linear models, neural networks, SVMs, and ensemble techniques.' },
+      { name: '👁️ Computer Vision', description: 'Fundamentals of image processing and analysis, including segmentation, feature extraction, and recognition using both classical methods and deep learning techniques.' },
+      { name: '🗣️ Advanced Human Language Technologies', description: 'Statistical and neural approaches to NLP, covering language modeling, parsing, embeddings, transformers, and large language models.' },
+      { name: '🖥️ Advanced Processor Architecture', description: 'Analysis of modern processor architectures, including superscalar, multicore, multithreaded, vector, and GPU systems.' },
     ],
     projects: [
       {
-        title: 'Computer Vision Project',
-        type: 'Computer Vision',
-        year: '2026',
-        description: '...',
-        technologies: [''],
-        grade: '-'
-      },
-      {
-        title: 'Machine Learning Project',
-        type: 'Machine Learning',
-        year: '2026',
-        description: '...',
-        technologies: [''],
-        grade: '-'
-      },
-      {
-        title: 'AHLT Project',
-        type: 'Advanced Human Language Technologies',
-        year: '2026',
-        description: '...',
-        technologies: [''],
-        grade: '-'
-      },
-      {
-        title: 'Novel L1 Cache Data Prefetcher',
+        title: 'L1 Data Prefetcher Design',
         type: 'Advanced Processor Architecture',
         year: '2026',
-        description: '...',
-        technologies: ['ChampSim'],
+        description: 'Designed and implemented a custom L1 data cache prefetcher within the ChampSim simulator. Evaluated performance through simulation metrics (IPC, cache hit rate, memory latency) and analyzed hardware cost trade-offs.',
+        technologies: ['C++', 'ChampSim', 'Computer Architecture', 'Cache Optimization', 'Simulation'],
         grade: '-'
       },
+      {
+        title: 'Biomedical NLP: Drug Interaction Extraction',
+        type: 'Advanced Human Language Technologies',
+        year: '2026',
+        description: 'Extended, optimized, and evaluated NLP pipelines for biomedical information extraction, focusing on drug named entity recognition and drug–drug interaction classification. Compared feature-based models, neural networks, and large language models through systematic experimentation, analyzing performance, computational cost, and model trade-offs.',
+        technologies: ['Python', 'Machine Learning', 'PyTorch/TensorFlow', 'NLP', 'LLMs', 'Sequence Labeling'],
+        grade: '-'
+      },
+      // {
+      //   title: 'Computer Vision Project',
+      //   type: 'Computer Vision',
+      //   year: '2026',
+      //   description: 'TBD',
+      //   technologies: ['TBD'],
+      //   grade: '-'
+      // },
+      // {
+      //   title: 'Machine Learning Project',
+      //   type: 'Machine Learning',
+      //   year: '2026',
+      //   description: 'TBD',
+      //   technologies: ['TBD'],
+      //   grade: '-'
+      // },
     ],
     activities: []
   },
   {
     id: 'bsc-computer-engineering',
-    university: 'Polytechnic University of Milan',
+    university: 'Polytechnic University of Milan (PoliMi)',
     degree: 'BSc in Computer Engineering',
     // subtitle: 'Final Grade: 100/110',
     duration: '2022 - 2025',
@@ -170,7 +170,7 @@ export const educationData: Degree[] = [
       },
       {
         title: 'Differential Filter Module for FPGA',
-        type: 'Course Project',
+        type: 'Digital Logic Design',
         year: '2025',
         description: 'Designed a hardware module in VHDL to apply a differential filter to data streams in memory. The system processes 8-bit signed words, alternating between 3rd-order and 5th-order filters based on a memory-mapped configuration.',
         technologies: ['VHDL', 'Vivado', 'FPGA Design Principles', 'Finite State Machines (FSM)'],
