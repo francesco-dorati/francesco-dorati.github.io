@@ -56,8 +56,9 @@ export default function Layout() {
       </main>
 
       <footer className="section" style={{ textAlign: 'center', marginTop: '4rem', opacity: 0.6, padding: '2rem 0', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
-        <p>Built with React and pure CSS</p>
+        <p>Built with React and pure CSS.</p>
         <p>© 2026 Francesco Dorati</p>
+        <p>fd.francescodorati@gmail.com</p>
       </footer>
     </div>
   );

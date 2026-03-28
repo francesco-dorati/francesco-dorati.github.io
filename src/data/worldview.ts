@@ -147,6 +147,19 @@ export interface AboutContent {
   featuredQuoteId: string;
 }
 
+export interface HomeContent {
+  role: string;
+  tagline: string;
+  location: string;
+  locationEmoji: string;
+  education: string;
+  socialLinks: {
+    label: string;
+    url: string;
+    type: 'email' | 'github' | 'linkedin' | 'scholar';
+  }[];
+}
+
 export const aboutContent: AboutContent = {
   intro: {
     title: 'About Me',
@@ -171,4 +184,18 @@ export const aboutContent: AboutContent = {
     philosophy: { title: 'VALUES & PHILOSOPHY' }
   },
   featuredQuoteId: 'eternal-comeback'
+};
+
+export const homeContent: HomeContent = {
+  role: 'Computer Engineer',
+  tagline: 'Physical AI & Autonomous Systems',
+  location: 'Barcelona, Spain',
+  locationEmoji: '​🇪🇸',
+  education: 'MSc Computer Science and Engineering @ Politecnico di Milano',
+  socialLinks: [
+    { label: 'Email', url: 'mailto:fd.francescodorati@gmail.com', type: 'email' },
+    { label: 'GitHub', url: 'https://github.com/francesco-dorati', type: 'github' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/francesco-dorati', type: 'linkedin' },
+    { label: 'Scholar', url: 'https://scholar.google.com/citations?user=BHMDVC0AAAAJ', type: 'scholar' }
+  ]
 };

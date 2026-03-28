@@ -34,3 +34,19 @@
   width: 1px; 
   background-color: rgba(95, 179, 179, 0.2);
 }
+
+/* Responsive Grid Spanning */
+.grid-column-span-3 {
+  grid-column: span 3;
+}
+
+.grid-column-span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .grid-column-span-3,
+  .grid-column-span-2 {
+    grid-column: span 1;
+  }
+}
