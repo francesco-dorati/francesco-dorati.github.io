@@ -2,13 +2,14 @@ About Me:
     - timeline ?
     - favourite books
     - favourite music
+    - favourite youtube videos??
+        - or a bookmark page 
     - ideas that changed how i think
 
 
 Learning Page:
-    - showcase education
 
-Projects Page
+Projects Page 
     - add journaling on some projects (short updates)
     - exeperiments or partial projects / tests (separate page but not in the bar)
         - automìnomous robot, autonomous plant watering system

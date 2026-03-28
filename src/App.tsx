@@ -8,6 +8,8 @@ import Films from './pages/Films';
 import Learning from './pages/Learning';
 import EducationDetail from './pages/EducationDetail';
 import ProgramDetail from './pages/ProgramDetail';
+import Philosophy from './pages/Philosophy';
+import Library from './pages/Library';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
@@ -22,6 +24,8 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<ProjectDetail />} />
           <Route path="films" element={<Films />} />
+          <Route path="philosophy" element={<Philosophy />} />
+          <Route path="library" element={<Library />} />
           <Route path="learning" element={<Learning />} />
           <Route path="education/:id" element={<EducationDetail />} />
           <Route path="programs/:id" element={<ProgramDetail />} />
