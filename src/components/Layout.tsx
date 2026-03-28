@@ -55,8 +55,8 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="section" style={{ textAlign: 'center', marginTop: '4rem', opacity: 0.6 }}>
-        <p>Built with <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">React</a> and pure CSS.</p>
+      <footer className="section" style={{ textAlign: 'center', marginTop: '4rem', opacity: 0.6, padding: '2rem 0', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <p>Built with React and pure CSS</p>
         <p>© 2026 Francesco Dorati</p>
       </footer>
     </div>

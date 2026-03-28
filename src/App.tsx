@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,7 +15,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -31,7 +31,7 @@ function App() {
           <Route path="programs/:id" element={<ProgramDetail />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
