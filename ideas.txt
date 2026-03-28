@@ -1,11 +1,16 @@
-About Me:
-    - timeline ?
-    - favourite books
-    - favourite music
-    - favourite youtube videos??
-        - or a bookmark page 
-    - ideas that changed how i think
+Home page:
+    - experiences section
+        - list of events i went to and my experience
 
+About Me:
+    - cinema page
+        - list of favourite directors
+    - library page
+        - list of fav books organized by genere
+    - values page   
+        - list of thought and quotes
+        - list of inspirational resources 
+            - by category (technology etc)
 
 Learning Page:
 
