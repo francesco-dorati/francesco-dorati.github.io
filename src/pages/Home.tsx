@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { homeContent } from '../data/worldview';
 import { projectsData } from '../data/projects';
-import { techStack, publications } from '../data/learning';
+import { publications, currentFocus } from '../data/learning';
 
 export default function Home() {
   return (
@@ -85,7 +85,7 @@ export default function Home() {
       </header>
 
       {/* 2. MAIN PROJECTS (Experience) */}
-      <section className="section" style={{ marginBottom: '5rem' }}>
+      <section className="section" style={{ marginBottom: '4rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '2rem' }}>
           <h3 style={{ fontSize: '1.2rem', color: '#8ab4f8', margin: 0, fontFamily: 'var(--font-mono)' }}>
             MAIN PROJECTS
@@ -144,94 +144,120 @@ export default function Home() {
 
       {/* 3. CORE_DIRECTIVES (Technical Skills) */}
       <section className="section" style={{ marginBottom: '5rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#8ab4f8', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
-          CORE_DIRECTIVES
+        <h3 style={{ fontSize: '1.2rem', color: '#fac863', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
+          RESEARCH INTERESTS
         </h3>
-        <div className="worldview-grid-3">
-          {techStack.slice(0, 6).map((cat, i) => (
-            <div key={i} style={{ 
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '1.5rem',
+          marginBottom: '1.5rem'
+        }}>
+          {/* Research Focus Area Cards */}
+          {currentFocus.slice(0, 2).map((focus, i) => (
+            <div key={`focus-${i}`} style={{ 
               backgroundColor: 'rgba(255, 255, 255, 0.02)', 
               border: '1px solid rgba(255, 255, 255, 0.05)', 
               borderRadius: '12px', 
-              padding: '1.5rem'
-            }}>
-              <div style={{ fontSize: '0.85rem', color: '#8ab4f8', fontWeight: 'bold', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
-                {cat.name}
+              padding: '1.8rem',
+              display: 'flex',
+              flexDirection: 'column',
+              transition: 'border-color 0.2s ease'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.borderColor = 'rgba(250, 200, 99, 0.2)'}
+            onMouseOut={(e) => e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.2rem' }}>
+                <span style={{ fontSize: '1.4rem' }}>{focus.icon}</span>
+                <div style={{ fontSize: '1.1rem', color: '#ffffff', fontWeight: 'bold', fontFamily: 'var(--font-mono)', letterSpacing: '0.5px' }}>
+                  {focus.title.toUpperCase()}
+                </div>
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
-                {cat.skills.slice(0, 5).map((skill, j) => (
+              <div style={{ 
+                display: 'flex', 
+                flexWrap: 'wrap',
+                gap: '0.6rem',
+                marginTop: '0.5rem'
+              }}>
+                {focus.bullets.map((bullet, j) => (
                   <span key={j} style={{ 
-                    fontSize: '0.75rem', 
+                    fontSize: '0.8rem', 
                     color: 'var(--text-secondary)',
-                    backgroundColor: 'rgba(255,255,255,0.03)',
-                    padding: '0.2rem 0.6rem',
-                    borderRadius: '4px',
-                    border: '1px solid rgba(255,255,255,0.05)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                    padding: '0.3rem 0.8rem',
+                    borderRadius: '50px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
                     fontFamily: 'var(--font-mono)'
                   }}>
-                    {skill}
+                    {bullet}
                   </span>
                 ))}
               </div>
             </div>
           ))}
         </div>
+
+        {/* Full-width "Explore Learning" card */}
+        <Link to="/learning" style={{ 
+          backgroundColor: 'transparent',
+          border: '1px dashed rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          padding: '1.2rem',
+          textAlign: 'center',
+          textDecoration: 'none',
+          color: '#fac863',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.9rem',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.8rem',
+          marginTop: '1.5rem'
+        }}
+        onMouseOver={(e) => { e.currentTarget.style.borderColor = 'rgba(250, 200, 99, 0.4)'; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'; }}
+        onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.backgroundColor = 'transparent'; }}
+        >
+          VIEW LEARNING PATH &rarr;
+        </Link>
       </section>
 
-      <div className="worldview-grid-3">
-        {/* 4. CHRONICLE (Education Snippet) */}
-        <section className="grid-column-span-2">
-          <h3 style={{ fontSize: '1.2rem', color: '#c594c5', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
-            CHRONICLE
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ 
-              padding: '1.5rem', 
+      {/* 4. SYSTEM_RESOURCES (Grid Navigation) */}
+      <section className="section" style={{ marginTop: '5rem' }}>
+        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', margin: '0 0 2.5rem 0', fontFamily: 'var(--font-mono)' }}>
+          RESOURCES
+        </h3>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+          gap: '1.2rem' 
+        }}>
+          {[
+            { path: '/projects', label: 'EXPERIENCE', sub: 'ENGINEERING ARCHIVE', color: '#8ab4f8' },
+            { path: '/learning', label: 'KNOWLEDGE', sub: 'TECHNICAL ROADMAP', color: '#fac863' },
+            { path: '/about', label: 'IDENTITY', sub: 'PROFILE & HISTORY', color: '#c594c5' },
+          ].map((item, i) => (
+            <Link key={i} to={item.path} style={{ 
               backgroundColor: 'rgba(255, 255, 255, 0.02)', 
               border: '1px solid rgba(255, 255, 255, 0.05)', 
-              borderRadius: '12px' 
-            }}>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 'bold' }}>MSc Computer Science and Engineering</div>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.4rem' }}>Politecnico di Milano • 2025 - Present</div>
-            </div>
-            <div style={{ 
-              padding: '1.5rem', 
-              backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-              border: '1px solid rgba(255, 255, 255, 0.05)', 
-              borderRadius: '12px' 
-            }}>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 'bold' }}>BSc Computing Systems Engineering</div>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.4rem' }}>Politecnico di Milano • 2022 - 2025</div>
-            </div>
-          </div>
-        </section>
-
-        {/* 5. PUBLICATIONS */}
-        <section>
-          <h3 style={{ fontSize: '1.2rem', color: '#99c794', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
-            ARCHIVE
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {publications.slice(0, 2).map((pub, i) => (
-              <a key={i} href={pub.link} target="_blank" rel="noopener noreferrer" style={{ 
-                padding: '1.2rem', 
-                backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-                border: '1px solid rgba(255, 255, 255, 0.05)', 
-                borderRadius: '12px',
-                textDecoration: 'none',
-                display: 'block',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseOver={(e) => { e.currentTarget.style.borderColor = '#99c794'; e.currentTarget.style.transform = 'translateX(5px)'; }}
-              onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.transform = 'translateX(0)'; }}
-              >
-                <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '0.9rem', lineHeight: '1.4' }}>{pub.title}</div>
-                <div style={{ fontSize: '0.75rem', color: '#99c794', marginTop: '0.5rem', fontFamily: 'var(--font-mono)' }}>[ {pub.year} ]</div>
-              </a>
-            ))}
-          </div>
-        </section>
-      </div>
+              borderRadius: '12px', 
+              padding: '1.5rem',
+              textDecoration: 'none',
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.4rem'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.borderColor = item.color; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.04)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: '0.7rem', color: item.color, fontFamily: 'var(--font-mono)' }}>[ {item.sub} ]</div>
+              <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '1rem', letterSpacing: '0.5px' }}>{item.label}</div>
+              <div style={{ fontSize: '0.8rem', color: item.color, marginTop: '0.5rem', fontFamily: 'var(--font-mono)' }}>ACCESS &rarr;</div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
     </div>
   );
