@@ -1,12 +1,42 @@
+import { Link } from 'react-router-dom';
 import { filmsData } from '../data/films';
 
 export default function Films() {
   return (
-    <div className="section" style={{ animation: 'fadeIn 0.5s ease-in' }}>
-      <h1>Films <span className="blinking-cursor"></span></h1>
+    <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
+      <div style={{ marginBottom: '2rem' }}>
+         <Link to="/about" className="muted" style={{ textDecoration: 'none', fontFamily: 'var(--font-mono)' }}>
+           ← cd ../about
+         </Link>
+      </div>
+
+      <h1 style={{ 
+        color: 'var(--text-primary)', 
+        borderBottom: 'none', 
+        fontSize: '2.4rem', 
+        margin: '0 0 1rem 0',
+        letterSpacing: '-0.5px',
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+        <span style={{ marginRight: '0.6rem', fontWeight: 'normal' }}>~/</span>
+        Cinema
+        <span className="blinking-cursor" style={{ marginLeft: '0.5rem' }}></span>
+      </h1>
       
-      <p style={{ marginTop: '1rem', marginBottom: '3rem', opacity: 0.8, maxWidth: '650px', lineHeight: '1.6' }}>
+      <p style={{ marginTop: '1rem', marginBottom: '4rem', opacity: 0.8, maxWidth: '650px', lineHeight: '1.6' }}>
         A curated list of my absolute favorite films. These movies have inspired my thoughts on technology, aesthetics, and philosophy.
+        <a href="https://letterboxd.com/francwscodorati/" target="_blank" rel="noopener noreferrer" style={{ 
+          display: 'inline-block',
+          marginLeft: '0.8rem',
+          color: '#fac863', 
+          textDecoration: 'none', 
+          fontFamily: 'var(--font-mono)', 
+          fontSize: '0.85rem',
+          fontWeight: 'bold'
+        }}>
+          LETTERBOXD &rarr;
+        </a>
       </p>
 
       <div className="films-grid">

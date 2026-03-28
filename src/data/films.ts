@@ -14,7 +14,7 @@ export const filmsData: Film[] = [
     director: 'Stanley Kubrick',
     year: 1968,
     description: '',
-    imageUrl: 'films/2001-2.jpg'
+    imageUrl: 'films/2001-3.jpg'
   },
   {
     id: 'apocalypse-now',
@@ -25,12 +25,12 @@ export const filmsData: Film[] = [
     imageUrl: 'films/AN-3.jpg'
   },
   {
-    id: 'grand-budapest-hotel',
-    title: 'The Grand Budapest Hotel',
-    director: 'Wes Anderson',
-    year: 2014,
+    id: 'the-shining',
+    title: 'The Shining',
+    director: 'Stanley Kubrick',
+    year: 1980,
     description: '',
-    imageUrl: 'films/TGBH.png'
+    imageUrl: 'films/TS-4.jpg'
   },
   {
     id: 'taxi-driver',
@@ -39,6 +39,14 @@ export const filmsData: Film[] = [
     year: 1976,
     description: '',
     imageUrl: 'films/TD-3.jpg'
+  },
+  {
+    id: 'grand-budapest-hotel',
+    title: 'The Grand Budapest Hotel',
+    director: 'Wes Anderson',
+    year: 2014,
+    description: '',
+    imageUrl: 'films/TGBH.png'
   },
   {
     id: 'sprited-away',
@@ -71,7 +79,7 @@ export const filmsData: Film[] = [
     director: 'Danny Boyle',
     year: 1996,
     description: '',
-    imageUrl: 'films/TS-2.jpg'
+    imageUrl: 'films/T-2.jpg'
   },
 
 ];

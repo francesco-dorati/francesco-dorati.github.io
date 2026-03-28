@@ -29,6 +29,12 @@ export interface CoreValue {
   text: string;
 }
 
+export interface Hobby {
+  emoji: string;
+  title: string;
+  description: string;
+}
+
 export const books: Book[] = [
   { id: 'zarathustra', title: 'Thus Spoke Zarathustra', author: 'Friedrich Nietzsche', category: 'Philosophy' },
   { id: 'prince', title: 'The Prince', author: 'Niccolò Machiavelli', category: 'Political Philosophy' },
@@ -76,27 +82,93 @@ export const timelineEvents: TimelineEvent[] = [
   {
     year: '2014',
     title: 'First Contact',
-    description: 'Bought my first computer at 12. Instead of playing games, I started rooting Androids and understanding the "how" behind the hardware.'
+    description: 'Bought my first computer at 12, initially driven by gaming. This led me to explore computer graphics and develop a deeper curiosity about how operating systems work. That curiosity eventually evolved into building and assembling my own computer from scratch.'
   },
   {
     year: '2020',
-    title: 'Lockdown Deep Dive',
-    description: 'The global pause became a catalyst. Dedicated 10+ hours a day to self-teaching full-stack development and complex systems.'
-  },
-  {
-    year: '2021',
-    title: 'The Robotics Pivot',
-    description: 'Joined the FALCO Drone project at university. Realized that while software is great, software that moves in the physical world is magic.'
+    title: 'Web Development & Competitive Programming',
+    description: 'Started learning programming in a structured way, exploring Java and JavaScript. Built web applications, working on both frontend and backend with databases, while also developing a strong interest in problem-solving through competitive programming.'
   },
   {
     year: '2023',
-    title: 'European Nomad',
-    description: 'UNITECH International. Living and studying in Lyon, Helsinki, and Barcelona. Gained a management perspective on engineering.'
+    title: 'Robotics Pivot',
+    description: 'Joined the FALCO Drone project at university. Realized that while software is powerful, building systems that interact with the physical world adds new challenges and constraints. This led to a deeper interest in robotics and autonomous systems.'
+  },
+  {
+    year: '2025',
+    title: 'International Experiences',
+    description: 'Participated in the UNITECH program, experiencing new international environments and ways of thinking while working with people from different backgrounds. This motivated me to pursue more international experiences and continue challenging myself in diverse contexts.'
   }
 ];
 
 export const coreValues: CoreValue[] = [
-  { emoji: '🧪', label: 'CURIOSITY', text: 'The root of all engineering. The "how" over the "what".' },
-  { emoji: '💠', label: 'MINIMALISM', text: 'High signal, low noise. Elimination of the non-essential.' },
-  { emoji: '🏔️', label: 'RESILIENCE', text: 'Embracing the obstacle. Turning stressors into strength.' }
+  { emoji: '🧭', label: 'EXPLORATION', text: 'Explore, jump, take risks and try new things.' },
+  { emoji: '🌱', label: 'GROWTH', text: 'Constant improvement and change. Always move forward.' },
+  { emoji: '⚖️', label: 'BALANCE', text: 'Everything in life should be a balance.' }
 ];
+
+export const hobbies: Hobby[] = [
+  {
+    emoji: '⛰️',
+    title: 'Outdoors Exploration',
+    description: 'Hiking, climbing, and spending time in nature.'
+  },
+  {
+    emoji: '🗺️',
+    title: 'Travel',
+    description: 'Exploring new places, cultures, and ways of life.'
+  },
+  {
+    emoji: '🥋',
+    title: 'Martial Arts',
+    description: 'Discipline, focus, and physical training.'
+  }
+];
+
+export interface SectionContent {
+  title: string;
+  description?: string;
+}
+
+export interface AboutContent {
+  intro: {
+    title: string;
+    description: string;
+  };
+  sections: {
+    profile: SectionContent;
+    timeline: SectionContent;
+    systemIdle: SectionContent;
+    cinema: SectionContent;
+    library: SectionContent;
+    finance: SectionContent;
+    philosophy: SectionContent;
+  };
+  featuredQuoteId: string;
+}
+
+export const aboutContent: AboutContent = {
+  intro: {
+    title: 'About Me',
+    description: 'A high-level view of my journey, ethics, and offline interests.'
+  },
+  sections: {
+    profile: { title: 'SYSTEM_PROFILE' },
+    timeline: { title: 'TIMELINE' },
+    systemIdle: { title: 'OFFLINE INTERESTS' },
+    cinema: { 
+      title: 'CINEMA', 
+      description: 'Deeply passionate about cinematography, from visual composition to storytelling.' 
+    },
+    library: { 
+      title: 'LIBRARY', 
+      description: 'Exploring ideas, ethics, and human nature through reading.' 
+    },
+    finance: { 
+      title: 'MONEY MANAGEMENT & FINANCE', 
+      description: 'Building financial independence through disciplined spending and long-term investing.' 
+    },
+    philosophy: { title: 'VALUES & PHILOSOPHY' }
+  },
+  featuredQuoteId: 'eternal-comeback'
+};
