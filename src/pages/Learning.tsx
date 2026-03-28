@@ -230,7 +230,7 @@ export default function Learning() {
                 <span style={{ color: '#fac863' }}>@</span> {degree.university}
               </p>
               <div style={{ color: '#ec5f67', fontFamily: 'var(--font-mono)', fontSize: degree.isExchange ? '0.8rem' : '0.9rem', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: degree.isExchange ? '1.2rem' : '0' }}>
-                VIEW EXCHANGE DETAILS <span>&rarr;</span>
+                {degree.isExchange ? 'VIEW EXCHANGE DETAILS' : 'VIEW COURSEWORK & PROJECTS'} <span>&rarr;</span>
               </div>
             </Link>
           ))}
