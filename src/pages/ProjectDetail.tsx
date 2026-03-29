@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { projectsData } from '../data/projects';
+import { publications } from '../data/learning';
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -91,33 +92,60 @@ export default function ProjectDetail() {
         </div>
       )}
 
-      {/* External Link / Publication */}
-      {project.link && (
-        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-          <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ 
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem',
-              backgroundColor: 'var(--color-primary)', 
-              color: 'var(--color-background)', 
-              padding: '0.8rem 1.5rem', 
-              borderRadius: '4px',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              fontFamily: 'var(--font-mono)',
-              transition: 'opacity 0.2s'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
-            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
-          >
-             VIEW PUBLICATION &rarr;
-          </a>
-        </div>
-      )}
-
       <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        <div style={{ backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #fac863' }}>
+        {/* Formal Publication */}
+        {project.link && (() => {
+            const pub = publications.find(p => p.link === project.link);
+            if (!pub) return (
+              <div key="pub-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
+                <h2 style={{ fontSize: '1.3rem', color: '#6699cc', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>Formal Publication</h2>
+                <div style={{ marginTop: '1.2rem' }}>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ 
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: '#6699cc',
+                    textDecoration: 'none',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.9rem'
+                  }}>
+                    VIEW EXTERNAL RESOURCE &rarr;
+                  </a>
+                </div>
+              </div>
+            );
+
+            return (
+              <div key="pub-exists" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
+                <h2 style={{ fontSize: '1.3rem', color: '#6699cc', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>Formal Publication</h2>
+                
+                <div style={{ marginTop: '1.5rem' }}>
+                   <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '1.1rem', lineHeight: '1.4', marginBottom: '0.8rem' }}>
+                     {pub.title}
+                   </div>
+                   
+                   <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.2rem', fontFamily: 'var(--font-mono)' }}>
+                     {pub.publisher} <span style={{ opacity: 0.3, margin: '0 0.5rem' }}>|</span> {pub.year} 
+                   </div>
+
+                   <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ 
+                     display: 'inline-flex',
+                     alignItems: 'center',
+                     gap: '0.5rem',
+                     color: '#6699cc',
+                     textDecoration: 'none',
+                     fontFamily: 'var(--font-mono)',
+                     fontSize: '0.9rem',
+                     fontWeight: 'bold'
+                   }}>
+                     VIEW PUBLICATION &rarr;
+                   </a>
+                </div>
+              </div>
+            );
+          })()}
+
+        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #fac863' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#fac863', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>toolkit</h2>
           <div style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
             {project.techStack.map((tech, i) => (
@@ -136,7 +164,7 @@ export default function ProjectDetail() {
           </div>
         </div>
         
-        <div style={{ backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
+        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>technical hurdles</h2>
           <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {project.challenges.map((challenge, i) => (
@@ -147,10 +175,9 @@ export default function ProjectDetail() {
             ))}
           </ul>
         </div>
-      </div>
 
-      {project.metrics && (
-         <div style={{ marginTop: '2.5rem', backgroundColor: 'color-mix(in srgb, var(--color-background), white 5%)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
+        {project.metrics && (
+          <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
             <h2 style={{ fontSize: '1.3rem', color: '#99c794', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>results & metrics</h2>
             <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                {project.metrics.map((metric, i) => (
@@ -160,8 +187,9 @@ export default function ProjectDetail() {
                  </li>
                ))}
             </ul>
-         </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

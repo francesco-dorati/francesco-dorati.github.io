@@ -17,6 +17,7 @@ export interface Project {
   link?: string;
   metrics?: string[];
   media?: ProjectMedia[];
+  hasPublication?: boolean;
 }
 
 export const projectsData: Project[] = [
@@ -68,6 +69,7 @@ export const projectsData: Project[] = [
     company: "AEA PoliMi",
     date: "Nov 2023 – Feb 2025",
     location: "Milan, Italy",
+    hasPublication: true,
     "shortDescription": "Developed a C++ path planning algorithm for autonomous drone navigation in complex urban environments.",
     "longDescription": [
       "As part of the FALCO autonomous drone project at Politecnico di Milano, I worked in a three-person software team to develop a path planning algorithm for dense urban navigation, generating collision-free trajectories from point cloud data.",
@@ -84,7 +86,7 @@ export const projectsData: Project[] = [
       "78% lower memory usage during the search phase.",
       "Work published at IEEE ROBOT2024."
     ],
-    link: "https://doi.org/10.1109/ROBOT61475.2024.10796871",
+    link: "https://ieeexplore.ieee.org/document/10796871",
     media: [
       {
         type: "video",

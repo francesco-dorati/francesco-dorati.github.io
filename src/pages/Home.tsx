@@ -109,11 +109,31 @@ export default function Home() {
             onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; }}
             >
               <div style={{ fontSize: '0.7rem', color: '#8ab4f8', fontFamily: 'var(--font-mono)' }}>[ {project.company.toUpperCase()} ]</div>
+              
               <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '1.1rem' }}>{project.title}</div>
               <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5', flex: 1 }}>
                 {project.shortDescription}
               </p>
-              <div style={{ fontSize: '0.8rem', color: '#8ab4f8', marginTop: '0.5rem' }}>DETAILS &rarr;</div>
+              
+              {project.hasPublication && (
+                <div style={{ marginTop: '0.5rem' }}>
+                  <span style={{ 
+                    fontSize: '0.65rem', 
+                    color: '#c594c5', 
+                    backgroundColor: 'rgba(197, 148, 147, 0.1)', 
+                    padding: '0.2rem 0.6rem', 
+                    borderRadius: '4px',
+                    border: '1px solid rgba(197, 148, 147, 0.2)',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 'bold',
+                    display: 'inline-block'
+                  }}>
+                    PUBLICATION
+                  </span>
+                </div>
+              )}
+              
+              <div style={{ fontSize: '0.8rem', color: '#8ab4f8', marginTop: '0.2rem' }}>DETAILS &rarr;</div>
             </Link>
           ))}
 
