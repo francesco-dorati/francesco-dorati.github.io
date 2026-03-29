@@ -102,76 +102,7 @@ export default function Learning() {
       </div>
 
 
-      {/* 5. Exploration & Future Log */}
-      <div style={{ marginBottom: '4rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#99c794', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
-          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
-          CURRENTLY LEARNING
-        </h3>
-        
-        <div style={{ 
-          fontFamily: 'var(--font-mono)', 
-          fontSize: '0.9rem', 
-          backgroundColor: 'rgba(0,0,0,0.1)', 
-          padding: '2rem', 
-          borderRadius: '12px',
-          border: '1px solid rgba(255,255,255,0.05)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem'
-        }}>
-          {exploring.map((item) => (
-            <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <span style={{ 
-                    fontSize: '0.75rem',
-                    padding: '0.2rem 0.6rem',
-                    borderRadius: '4px',
-                    backgroundColor: item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.1)' : 'rgba(255,255,255,0.05)',
-                    color: item.status === 'LEARNING' ? '#fac863' : 'var(--text-muted)',
-                    border: `1px solid ${item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.2)' : 'rgba(255,255,255,0.1)'}`
-                  }}>
-                    {item.status}
-                  </span>
-                  <span style={{ color: 'var(--text-primary)', fontSize: '1rem' }}>{item.title}</span>
-                  {item.source && (
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', opacity: 0.8, fontFamily: 'var(--font-mono)' }}>
-                      // {item.source}
-                    </span>
-                  )}
-                </div>
-                {item.status === 'LEARNING' && (
-                  <span style={{ color: '#99c794', fontWeight: 'bold' }}>{item.progress}%</span>
-                )}
-              </div>
-              
-              {item.status === 'LEARNING' && (
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', opacity: 0.9 }}>
-                  <span style={{ color: 'var(--text-muted)' }}>[</span>
-                  <div style={{ flex: 1, height: '6px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden', display: 'flex' }}>
-                    <div style={{ 
-                      width: `${item.progress}%`, 
-                      height: '100%', 
-                      backgroundColor: '#99c794',
-                      boxShadow: '0 0 10px rgba(153, 199, 148, 0.3)'
-                    }} />
-                  </div>
-                  <span style={{ color: 'var(--text-muted)' }}>]</span>
-                </div>
-              )}
-              
-              {item.status !== 'LEARNING' && (
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic', marginLeft: '0.5rem' }}>
-                  {'>>'} STATUS_QUEUED: Awaiting resource allocation...
-                </div>
-              )}
-            </div>
-          ))}
-          
-
-        </div>
-      </div>
+      
 
       {/* 3. Formal Education Section */}
       <div style={{ marginBottom: '4rem' }}>
@@ -353,7 +284,77 @@ export default function Learning() {
           ))}
         </div>
       </div>
+        
+      {/* 5. Exploration & Future Log */}
+      <div style={{ marginBottom: '4rem' }}>
+        <h3 style={{ fontSize: '1.2rem', color: '#99c794', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
+          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
+          CURRENTLY LEARNING
+        </h3>
+        
+        <div style={{ 
+          fontFamily: 'var(--font-mono)', 
+          fontSize: '0.9rem', 
+          backgroundColor: 'rgba(0,0,0,0.1)', 
+          padding: '2rem', 
+          borderRadius: '12px',
+          border: '1px solid rgba(255,255,255,0.05)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem'
+        }}>
+          {exploring.map((item) => (
+            <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <span style={{ 
+                    fontSize: '0.75rem',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '4px',
+                    backgroundColor: item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.1)' : 'rgba(255,255,255,0.05)',
+                    color: item.status === 'LEARNING' ? '#fac863' : 'var(--text-muted)',
+                    border: `1px solid ${item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.2)' : 'rgba(255,255,255,0.1)'}`
+                  }}>
+                    {item.status}
+                  </span>
+                  <span style={{ color: 'var(--text-primary)', fontSize: '1rem' }}>{item.title}</span>
+                  {item.source && (
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', opacity: 0.8, fontFamily: 'var(--font-mono)' }}>
+                      // {item.source}
+                    </span>
+                  )}
+                </div>
+                {item.status === 'LEARNING' && (
+                  <span style={{ color: '#99c794', fontWeight: 'bold' }}>{item.progress}%</span>
+                )}
+              </div>
+              
+              {item.status === 'LEARNING' && (
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', opacity: 0.9 }}>
+                  <span style={{ color: 'var(--text-muted)' }}>[</span>
+                  <div style={{ flex: 1, height: '6px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden', display: 'flex' }}>
+                    <div style={{ 
+                      width: `${item.progress}%`, 
+                      height: '100%', 
+                      backgroundColor: '#99c794',
+                      boxShadow: '0 0 10px rgba(153, 199, 148, 0.3)'
+                    }} />
+                  </div>
+                  <span style={{ color: 'var(--text-muted)' }}>]</span>
+                </div>
+              )}
+              
+              {item.status !== 'LEARNING' && (
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic', marginLeft: '0.5rem' }}>
+                  {'>>'} STATUS_QUEUED: Awaiting resource allocation...
+                </div>
+              )}
+            </div>
+          ))}
+          
 
+        </div>
+      </div>
       
 
 

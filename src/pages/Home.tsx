@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { homeContent } from '../data/worldview';
 import { projectsData } from '../data/projects';
-import { publications, currentFocus } from '../data/learning';
+import { currentFocus } from '../data/learning';
 
 export default function Home() {
   return (
