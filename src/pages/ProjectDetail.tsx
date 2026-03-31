@@ -165,7 +165,7 @@ export default function ProjectDetail() {
         </div>
         
         <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
-          <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>technical hurdles</h2>
+          <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>challenges</h2>
           <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {project.challenges.map((challenge, i) => (
               <li key={i} style={{ display: 'flex', gap: '0.8rem', alignItems: 'flex-start', lineHeight: '1.6', color: 'var(--text-secondary)' }}>

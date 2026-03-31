@@ -23,22 +23,39 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: "agv-robot",
-    title: "Autonomous Ground Vehicle",
+    title: "Autonomous Ground Vehicle for Wharehouse",
     company: "DevNut",
     date: "Jan 2026 – Present",
     location: "Remote",
     shortDescription: "Computer vision-based navigation system for autonomous ground vehicles (AGV), replacing traditional ground-line sensors.",
     longDescription: [
-      "Currently rethinking how AGVs navigate in industrial settings. Traditional AGVs rely on magnetic tape or painted lines on the floor, which are rigid and expensive to maintain.",
-      "My work focuses on replacing this infrastructure with a purely vision-based approach. By utilizing cameras and computer vision algorithms, the robot can understand its environment dynamically.",
-      "A significant portion of this project involves creating robust simulated environments to test the navigation stack before deploying to physical hardware, ensuring safety and reliability."
+      "I contributed to an R&D project at DevNut (Italian Tech Startup) focused on replacing traditional line-following AGV systems with a flexible, computer-vision-based navigation approach. The goal is to enable dynamic path planning and obstacle avoidance in warehouse environments, eliminating the need for fixed painted floor lines and improving operational adaptability.",
+    
+      "Working in a team of four, I helped design and implement the full navigation stack in simulation using Webots, including control logic, environment modeling, and data logging and visualization tools.",
+    
+      "We implemented a baseline navigation system using LiDAR for obstacle detection and GPS for global localization, combined with a goal-based controller. The robot navigates toward waypoints while dynamically adjusting its trajectory in response to obstacles using a reactive avoidance strategy.",
+    
+      "The next step of the project is to transition away from LiDAR-based perception toward a camera-driven approach, leveraging computer vision techniques such as Visual SLAM to enable richer environmental understanding and more scalable navigation."
     ],
-    techStack: ["Python", "Webots simulation", "Sensor Integration", "Reactive Navigation"],
+
+    techStack: ["Python", "Simulation (Webots)", "Autonomous Navigation", "Sensor Integration"],
     challenges: [
-      "Reactive navigation failures due to local minima problem.",
-      "Testing navigation behaviours across simulated warehouse scenarios."
+      "Overcoming local minima issues in purely reactive navigation systems.",
+      "Designing a flexible navigation pipeline without relying on predefined infrastructure.",
+      "Building a realistic simulation environment for testing navigation strategies."
     ],
-    metrics: ["Fully functional simulation-based navigation prototype."]
+    metrics: [
+      "Implemented end-to-end autonomous navigation pipeline in simulation.",
+      "Achieved reliable waypoint tracking with dynamic obstacle avoidance.",
+      "Developed reusable warehouse simulation framework for testing and evaluation."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "/projects/agv-robot/demonstration.mp4",
+        description: "Simulation of the current navigation system (5x speedup)"
+      }
+    ],
   },
   {
     id: "unitree-g1",
@@ -46,21 +63,25 @@ export const projectsData: Project[] = [
     company: "AEA PoliMi",
     date: "Sept 2025 – Present",
     location: "Milan, Italy",
-    shortDescription: "Implementing state-of-the-art RL approaches for Unitree G1, training locomotion models using imitation learning.",
+    hasPublication: false,
+    shortDescription: "Implementing state-of-the-art RL approaches for Unitree G1, focusing locomotion models using imitation learning.",
     longDescription: [
-      "Working with the Unitree G1 humanoid robot represents a shift towards highly dynamic, bio-inspired robotics. Traditional control theory struggles with the high degrees of freedom and complex contact dynamics of bipedal walking.",
-      "I am implementing Reinforcement Learning pipelines to teach the robot robust locomotion policies. This involves using massive parallel simulation (Isaac Sim / MuJoCo) to train policies via PPO.",
-      "A key innovation in this work is integrating a scene reconstruction pipeline to improve the robot's spatial awareness and terrain adaptation."
+      "As part of a newly formed research initiative at Politecnico di Milano, I joined the ML/RL team working on the Unitree G1 humanoid robot after being selected through prior contributions. The project originated from a collaboration opportunity with content creator Jakidale, who had recently acquired the platform.",
+    
+      "Given the early-stage nature of the project, I contributed to defining the technical direction by reviewing state-of-the-art reinforcement learning approaches for locomotion and loco-manipulation. My focus evolved toward developing robust locomotion policies capable of handling uneven terrain and external disturbances.",
+    
+      "I initially explored the VideoMimic framework from UC Berkeley, which conditions locomotion policies on LiDAR-based perception. However, due to instability introduced by the robot’s high degrees of freedom and dexterous hands, I decided to redesign the pipeline from scratch, independently implementing and training a new locomotion policy without relying on the original codebase."
+  
     ],
-    techStack: ["Reinforcement Learning", "Humanoid Locomotion Control", "Isaac Sim / MuJoCo", "Imitation Learning", "Python"],
+    techStack: ["Reinforcement Learning", "Humanoid Locomotion", "Simulation (Isaac Sim / MuJoCo)", "Imitation Learning", "Python"],
     challenges: [
-      "Stabilizing locomotion policies in robots with dexterous manipulators.",
-      "Integrating perception signals into locomotion policies.",
-      "Training robust policies under dynamic disturbances."
+      "Stabilizing locomotion in a high-DOF humanoid robot with additional manipulation capabilities.",
+      "Adapting perception-conditioned policies to work reliably without existing frameworks.",
+      "Operating in an early-stage project with undefined roles and evolving objectives."
     ],
     metrics: [
-      "100% walking stability in simulation",
-      "Robust to lateral external pushes without falling.",
+      "Achieved 100% stability in simulation on flat terrain.",
+      "Maintained stability under lateral perturbations without falling."
     ],
   },
   {

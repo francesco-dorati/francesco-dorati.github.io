@@ -11,11 +11,13 @@ import ProgramDetail from './pages/ProgramDetail';
 import Philosophy from './pages/Philosophy';
 import Library from './pages/Library';
 import ScrollToTop from './components/ScrollToTop';
+import Analytics from './components/Analytics';
 import './App.css';
 
 function App() {
   return (
     <HashRouter>
+      <Analytics />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
