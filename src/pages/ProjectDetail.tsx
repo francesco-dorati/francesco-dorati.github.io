@@ -1,10 +1,22 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { projectsData } from '../data/projects';
 import { publications } from '../data/learning';
+import { trackEvent } from '../components/Analytics';
+import TrackedLink from '../components/TrackedLink';
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = projectsData.find(p => p.id === id);
+
+  useEffect(() => {
+    if (project) {
+      trackEvent(`view_proj_${project.id.replace(/-/g, '_')}`, {
+        title: project.title,
+        company: project.company
+      });
+    }
+  }, [project]);
 
   if (!project) {
     return <Navigate to="/projects" replace />;
@@ -128,18 +140,22 @@ export default function ProjectDetail() {
                      {pub.publisher} <span style={{ opacity: 0.3, margin: '0 0.5rem' }}>|</span> {pub.year} 
                    </div>
 
-                   <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ 
-                     display: 'inline-flex',
-                     alignItems: 'center',
-                     gap: '0.5rem',
-                     color: '#6699cc',
-                     textDecoration: 'none',
-                     fontFamily: 'var(--font-mono)',
-                     fontSize: '0.9rem',
-                     fontWeight: 'bold'
-                   }}>
+                   <TrackedLink 
+                     href={pub.link} 
+                     label={`Publication: ${pub.title}`}
+                     category="outbound"
+                     style={{ 
+                       display: 'inline-flex',
+                       alignItems: 'center',
+                       gap: '0.5rem',
+                       color: '#6699cc',
+                       textDecoration: 'none',
+                       fontFamily: 'var(--font-mono)',
+                       fontSize: '0.9rem',
+                       fontWeight: 'bold'
+                     }}>
                      VIEW PUBLICATION &rarr;
-                   </a>
+                   </TrackedLink>
                 </div>
               </div>
             );

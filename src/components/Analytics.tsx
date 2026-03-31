@@ -7,18 +7,33 @@ declare global {
   }
 }
 
+/**
+ * Utility to manually track events across the app.
+ * Usage: trackEvent('click_cta', { label: 'Resume Download' })
+ */
+export const trackEvent = (action: string, params: Record<string, any> = {}) => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', action, params);
+  } else {
+    console.debug('[Analytics] gtag not available for event:', action, params);
+  }
+};
+
 const Analytics = () => {
   const location = useLocation();
 
   useEffect(() => {
     if (typeof window.gtag === 'function') {
       // Track page view on route change
-      // For HashRouter, we want to include the full path including the hash
       const fullPath = window.location.pathname + window.location.hash;
       
-      window.gtag('config', 'G-BPRWRM0LMY', {
+      window.gtag('event', 'page_view', {
         page_path: fullPath,
+        page_location: window.location.href,
+        page_title: document.title,
       });
+
+      console.debug('[Analytics] Page view tracked:', fullPath);
     }
   }, [location]);
 

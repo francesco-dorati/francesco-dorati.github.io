@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { educationData, programs } from '../data/education';
 import { currentFocus, exploring, onlineCourses, techStack, languages, publications } from '../data/learning';
+import TrackedLink from '../components/TrackedLink';
 
 export default function Learning() {
   return (
@@ -176,11 +177,11 @@ export default function Learning() {
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {publications.map((pub, i) => (
-            <a 
+            <TrackedLink 
               key={i} 
               href={pub.link || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
+              label={`Publication: ${pub.title}`}
+              category="outbound"
               className="publication-card"
               style={{ 
                 padding: '1.2rem',
@@ -189,7 +190,8 @@ export default function Learning() {
                 borderRadius: '8px',
                 textDecoration: 'none',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                display: 'block'
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
@@ -235,7 +237,7 @@ export default function Learning() {
               >
                 [{pub.year}]
               </div>
-            </a>
+            </TrackedLink>
           ))}
         </div>
       </div>
@@ -371,11 +373,11 @@ export default function Learning() {
           gap: '1rem' 
         }}>
           {onlineCourses.map(course => (
-            <a 
+            <TrackedLink 
               key={course.id} 
               href={course.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
+              label={`Course: ${course.title}`}
+              category="outbound"
               style={{ 
                 backgroundColor: 'rgba(255, 255, 255, 0.02)', 
                 border: '1px solid rgba(255, 255, 255, 0.05)', 
@@ -406,7 +408,7 @@ export default function Learning() {
               <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <span style={{ color: '#c594c5', opacity: 0.8 }}>@</span> {course.platform}
               </div>
-            </a>
+            </TrackedLink>
           ))}
         </div>
       </div>

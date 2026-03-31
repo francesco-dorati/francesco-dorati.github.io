@@ -1,11 +1,21 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { educationData } from '../data/education';
+import { trackEvent } from '../components/Analytics';
 
 export default function EducationDetail() {
   const { id } = useParams();
   const degree = educationData.find(d => d.id === id);
   const [showAllCourses, setShowAllCourses] = useState(false);
+
+  useEffect(() => {
+    if (degree) {
+      trackEvent(`view_edu_${degree.id.replace(/-/g, '_')}`, {
+        university: degree.university,
+        degree: degree.degree
+      });
+    }
+  }, [degree]);
 
   if (!degree) {
     return (

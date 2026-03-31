@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { homeContent } from '../data/worldview';
 import { projectsData } from '../data/projects';
 import { currentFocus } from '../data/learning';
+import TrackedLink from '../components/TrackedLink';
 
 export default function Home() {
   return (
@@ -45,11 +46,11 @@ export default function Home() {
           
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginTop: '1.5rem' }}>
             {homeContent.socialLinks.map((link, i) => (
-              <a 
+              <TrackedLink 
                 key={i} 
                 href={link.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+                label={`Social: ${link.label}`}
+                category="outbound"
                 style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -78,7 +79,7 @@ export default function Home() {
               >
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>&gt;_</span>
                 {link.label}
-              </a>
+              </TrackedLink>
             ))}
           </div>
         </div>
@@ -94,19 +95,24 @@ export default function Home() {
 
         <div className="worldview-grid-3">
           {projectsData.slice(0, 3).map((project) => (
-            <Link key={project.id} to={`/projects/${project.id}`} style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-              border: '1px solid rgba(255, 255, 255, 0.05)', 
-              borderRadius: '12px', 
-              padding: '1.5rem',
-              textDecoration: 'none',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.8rem'
-            }}
-            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(138, 180, 248, 0.4)'; }}
-            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; }}
+            <TrackedLink 
+              key={project.id} 
+              to={`/projects/${project.id}`} 
+              label={`Project Card: ${project.title}`}
+              category="internal"
+              style={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+                border: '1px solid rgba(255, 255, 255, 0.05)', 
+                borderRadius: '12px', 
+                padding: '1.5rem',
+                textDecoration: 'none',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.8rem'
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(138, 180, 248, 0.4)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; }}
             >
               <div style={{ fontSize: '0.7rem', color: '#8ab4f8', fontFamily: 'var(--font-mono)' }}>[ {project.company.toUpperCase()} ]</div>
               
@@ -134,7 +140,7 @@ export default function Home() {
               )}
               
               <div style={{ fontSize: '0.8rem', color: '#8ab4f8', marginTop: '0.2rem' }}>DETAILS &rarr;</div>
-            </Link>
+            </TrackedLink>
           ))}
 
           {/* Full-width "View All" card */}

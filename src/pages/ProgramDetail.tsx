@@ -1,11 +1,22 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { programs } from '../data/education';
+import { trackEvent } from '../components/Analytics';
+import TrackedLink from '../components/TrackedLink';
 
 export default function ProgramDetail() {
   const { id } = useParams();
   const program = programs.find(p => p.id === id);
   const [showAllActivities, setShowAllActivities] = useState(false);
+
+  useEffect(() => {
+    if (program) {
+      trackEvent(`view_prog_${program.id.replace(/-/g, '_')}`, {
+        name: program.name,
+        institution: program.institution
+      });
+    }
+  }, [program]);
 
   if (!program) {
     return (
@@ -62,10 +73,10 @@ export default function ProgramDetail() {
           <span>
             <span style={{ color: '#fac863' }}>@ </span> 
             {program.website ? (
-              <a 
+              <TrackedLink 
                 href={program.website} 
-                target="_blank" 
-                rel="noopener noreferrer"
+                label={`Program Institution: ${program.institution}`}
+                category="outbound"
                 style={{ 
                   color: 'var(--text-primary)', 
                   textDecoration: 'none',
@@ -83,7 +94,7 @@ export default function ProgramDetail() {
                 }}
               >
                 {program.institution}
-              </a>
+              </TrackedLink>
             ) : (
               <span style={{ color: 'var(--text-primary)' }}>{program.institution}</span>
             )}
