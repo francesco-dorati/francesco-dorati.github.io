@@ -83,6 +83,13 @@ export const projectsData: Project[] = [
       "Achieved 100% stability in simulation on flat terrain.",
       "Maintained stability under lateral perturbations without falling."
     ],
+    media: [
+      {
+        type: "video",
+        url: "/projects/unitree-g1/pushes.mp4",
+        description: "Simulation of basic locomotion with 1.5 m/s pushes"
+      }
+    ]
   },
   {
     id: "falco-drone",
