@@ -9,7 +9,7 @@ export default function Home() {
     <div style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       
       {/* 1. HERO SECTION */}
-      <header className="section" style={{ marginBottom: '4rem' }}>
+      <header className="section" style={{ marginBottom: '3rem' }}>
         <h1 style={{ 
           color: 'var(--text-primary)', 
           borderBottom: 'none', 
@@ -84,6 +84,43 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* 4. SYSTEM_RESOURCES (Grid Navigation) */}
+      <section className="section" style={{ marginBottom: '5rem' }}>
+        {/* <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
+          RESOURCES
+        </h3> */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+          gap: '1.5rem' 
+        }}>
+          {[
+            { path: '/projects', label: 'EXPERIENCE', sub: 'ENGINEERING ARCHIVE', color: '#8ab4f8' },
+            { path: '/learning', label: 'KNOWLEDGE', sub: 'TECHNICAL ROADMAP', color: '#fac863' },
+            { path: '/about', label: 'IDENTITY', sub: 'PROFILE & HISTORY', color: '#c594c5' },
+          ].map((item, i) => (
+            <Link key={i} to={item.path} style={{ 
+              backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+              border: '1px solid rgba(255, 255, 255, 0.05)', 
+              borderRadius: '12px', 
+              padding: '1.5rem',
+              textDecoration: 'none',
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.8rem'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.borderColor = item.color; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.04)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: '0.7rem', color: item.color, fontFamily: 'var(--font-mono)' }}>[ {item.sub} ]</div>
+              <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '1rem', letterSpacing: '0.5px' }}>{item.label}</div>
+              <div style={{ fontSize: '0.8rem', color: item.color, marginTop: '0.5rem', fontFamily: 'var(--font-mono)' }}>ACCESS &rarr;</div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* 2. MAIN PROJECTS (Experience) */}
       <section className="section" style={{ marginBottom: '4rem' }}>
@@ -248,42 +285,7 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* 4. SYSTEM_RESOURCES (Grid Navigation) */}
-      <section className="section" style={{ marginTop: '5rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', margin: '0 0 2.5rem 0', fontFamily: 'var(--font-mono)' }}>
-          RESOURCES
-        </h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-          gap: '1.2rem' 
-        }}>
-          {[
-            { path: '/projects', label: 'EXPERIENCE', sub: 'ENGINEERING ARCHIVE', color: '#8ab4f8' },
-            { path: '/learning', label: 'KNOWLEDGE', sub: 'TECHNICAL ROADMAP', color: '#fac863' },
-            { path: '/about', label: 'IDENTITY', sub: 'PROFILE & HISTORY', color: '#c594c5' },
-          ].map((item, i) => (
-            <Link key={i} to={item.path} style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-              border: '1px solid rgba(255, 255, 255, 0.05)', 
-              borderRadius: '12px', 
-              padding: '1.5rem',
-              textDecoration: 'none',
-              transition: 'all 0.2s ease',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.4rem'
-            }}
-            onMouseOver={(e) => { e.currentTarget.style.borderColor = item.color; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.04)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-            onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              <div style={{ fontSize: '0.7rem', color: item.color, fontFamily: 'var(--font-mono)' }}>[ {item.sub} ]</div>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '1rem', letterSpacing: '0.5px' }}>{item.label}</div>
-              <div style={{ fontSize: '0.8rem', color: item.color, marginTop: '0.5rem', fontFamily: 'var(--font-mono)' }}>ACCESS &rarr;</div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      
 
     </div>
   );
