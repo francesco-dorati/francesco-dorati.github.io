@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projects';
 
 export default function Projects() {
+
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in' }}>
       <h1 style={{ 
@@ -25,7 +26,7 @@ export default function Projects() {
 
       <ul style={{ display: 'flex', flexDirection: 'column', gap: '2rem', listStyle: 'none', padding: 0 }}>
         {projectsData.map((project) => (
-          <li key={project.id} style={{ display: 'block' }}>
+          <li id={`project-card-${project.id}`} key={project.id} style={{ display: 'block' }}>
             <Link to={`/projects/${project.id}`} style={{ 
               textDecoration: 'none', 
               display: 'block'

@@ -1,6 +1,4 @@
-import React from 'react';
 import { Link, type LinkProps } from 'react-router-dom';
-import { trackEvent } from './Analytics';
 
 interface TrackedLinkProps extends Partial<Omit<LinkProps, 'to'>> {
   href?: string;
@@ -12,6 +10,7 @@ interface TrackedLinkProps extends Partial<Omit<LinkProps, 'to'>> {
   children: React.ReactNode;
   target?: string;
   rel?: string;
+  context?: string;
 }
 
 /**
@@ -23,31 +22,34 @@ const TrackedLink: React.FC<TrackedLinkProps> = ({
   to, 
   label, 
   category = 'outbound', 
+  context,
   children, 
   ...props 
 }) => {
-  const handleClick = () => {
-    // Sanitize label for use as an event name (lowercase, replace spaces/special with _)
-    const sanitizedLabel = label.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    
-    // Fire a specific click event for the link
-    trackEvent(`click_${sanitizedLabel}`, {
-      event_category: category,
-      label: label,
-      url: href || to,
-    });
+  const umamiProps = {
+    'data-umami-event': category === 'outbound' ? 'Outbound Link' : label.slice(0, 50),
+    'data-umami-event-label': label,
+    'data-umami-event-category': category,
+    'data-umami-event-context': context,
+    'data-umami-event-url': href || to
   };
 
   if (to) {
     return (
-      <Link to={to} {...(props as Omit<LinkProps, 'to'>)} onClick={handleClick}>
+      <Link to={to} {...(props as Omit<LinkProps, 'to'>)} {...umamiProps}>
         {children}
       </Link>
     );
   }
 
   return (
-    <a href={href} {...props} onClick={handleClick} target={props.target || "_blank"} rel={props.rel || "noopener noreferrer"}>
+    <a 
+      href={href} 
+      {...props} 
+      {...umamiProps} 
+      target={props.target || "_blank"} 
+      rel={props.rel || "noopener noreferrer"}
+    >
       {children}
     </a>
   );

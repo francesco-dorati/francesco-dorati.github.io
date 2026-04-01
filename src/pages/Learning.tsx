@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import { educationData, programs } from '../data/education';
 import { currentFocus, exploring, onlineCourses, techStack, languages, publications } from '../data/learning';
+import { useSectionTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 
 export default function Learning() {
+  useSectionTracking({
+    'learn-education': 'Degrees', 
+    'learn-publications': 'Publications', 
+    'learn-programs': 'Programs', 
+    'learn-courses': 'Courses', 
+    'learn-tech': 'Stack'
+  }, 'Learning');
+
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       
@@ -42,7 +51,7 @@ export default function Learning() {
       </div>
 
       {/* 2. Expertise & Research Interests */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-interests" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#6699cc', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           RESEARCH INTERESTS
@@ -106,7 +115,7 @@ export default function Learning() {
       
 
       {/* 3. Formal Education Section */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-education" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#ec5f67', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           FORMAL EDUCATION
@@ -170,7 +179,7 @@ export default function Learning() {
       </div>
 
       {/* 2.6 Research & Publications */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-publications" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#6699cc', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           RESEARCH & PUBLICATIONS
@@ -182,6 +191,7 @@ export default function Learning() {
               href={pub.link || '#'}
               label={`Publication: ${pub.title}`}
               category="outbound"
+              context="Learning Publications"
               className="publication-card"
               style={{ 
                 padding: '1.2rem',
@@ -243,7 +253,7 @@ export default function Learning() {
       </div>
 
       {/* 2.5 Programs & Fellowships Section */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-programs" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#fac863', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           PROGRAMS & FELLOWSHIPS
@@ -362,7 +372,7 @@ export default function Learning() {
 
 
       {/* 2.6 Online Courses & Certifications Section */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-courses" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#c594c5', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           ONLINE COURSES & CERTIFICATIONS
@@ -378,6 +388,7 @@ export default function Learning() {
               href={course.url} 
               label={`Course: ${course.title}`}
               category="outbound"
+              context="Learning Courses"
               style={{ 
                 backgroundColor: 'rgba(255, 255, 255, 0.02)', 
                 border: '1px solid rgba(255, 255, 255, 0.05)', 
@@ -418,7 +429,7 @@ export default function Learning() {
 
 
       {/* 5. Tech Stack Section */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div id="learn-tech" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#6699cc', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
           {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
           TECHNICAL STACK

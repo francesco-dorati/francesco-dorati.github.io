@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { programs } from '../data/education';
-import { trackEvent } from '../components/Analytics';
+import { useScrollTracking, useSectionTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 
 export default function ProgramDetail() {
@@ -9,14 +9,12 @@ export default function ProgramDetail() {
   const program = programs.find(p => p.id === id);
   const [showAllActivities, setShowAllActivities] = useState(false);
 
-  useEffect(() => {
-    if (program) {
-      trackEvent(`view_prog_${program.id.replace(/-/g, '_')}`, {
-        name: program.name,
-        institution: program.institution
-      });
-    }
-  }, [program]);
+  useSectionTracking({
+    'prog-journey': 'Journey',
+    'prog-activities': 'Activities',
+    'prog-projects': 'Projects'
+  }, `Program: ${program?.name || 'Unknown'}`);
+  useScrollTracking(program?.name || 'Program Detail');
 
   if (!program) {
     return (
@@ -77,6 +75,7 @@ export default function ProgramDetail() {
                 href={program.website} 
                 label={`Program Institution: ${program.institution}`}
                 category="outbound"
+                context="Program Detail Header"
                 style={{ 
                   color: 'var(--text-primary)', 
                   textDecoration: 'none',
@@ -120,7 +119,7 @@ export default function ProgramDetail() {
 
       {/* Program Timeline */}
       {program.timeline && program.timeline.length > 0 && (
-        <div style={{ marginBottom: '5rem' }}>
+        <div id="prog-journey" style={{ marginBottom: '5rem' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#face63', margin: '0 0 2rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> PROGRAM JOURNEY
           </h2>
@@ -161,7 +160,7 @@ export default function ProgramDetail() {
 
       {/* Activities Grid */}
       {program.activities && program.activities.length > 0 && (
-        <div style={{ marginBottom: '4rem' }}>
+        <div id="prog-activities" style={{ marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#5fb3b3', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> KEY ENGAGEMENTS
           </h2>
@@ -220,7 +219,7 @@ export default function ProgramDetail() {
 
       {/* Projects List */}
       {program.projects && program.projects.length > 0 && (
-        <div>
+        <div id="prog-projects">
           <h2 style={{ fontSize: '1.3rem', color: 'var(--terminal-blue)', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> RELATED PROJECTS
           </h2>

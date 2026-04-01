@@ -9,7 +9,7 @@ export default function Home() {
     <div style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       
       {/* 1. HERO SECTION */}
-      <header className="section" style={{ marginBottom: '3rem' }}>
+      <header id="home-hero" className="section" style={{ marginBottom: '3rem' }}>
         <h1 style={{ 
           color: 'var(--text-primary)', 
           borderBottom: 'none', 
@@ -51,6 +51,7 @@ export default function Home() {
                 href={link.url} 
                 label={`Social: ${link.label}`}
                 category="outbound"
+                context="Home Hero"
                 style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -86,7 +87,7 @@ export default function Home() {
       </header>
 
       {/* 4. SYSTEM_RESOURCES (Grid Navigation) */}
-      <section className="section" style={{ marginBottom: '5rem' }}>
+      <section id="home-resources" className="section" style={{ marginBottom: '5rem' }}>
         {/* <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
           RESOURCES
         </h3> */}
@@ -123,7 +124,7 @@ export default function Home() {
       </section>
 
       {/* 2. MAIN PROJECTS (Experience) */}
-      <section className="section" style={{ marginBottom: '4rem' }}>
+      <section id="home-projects" className="section" style={{ marginBottom: '4rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '2rem' }}>
           <h3 style={{ fontSize: '1.2rem', color: '#8ab4f8', margin: 0, fontFamily: 'var(--font-mono)' }}>
             MAIN PROJECTS
@@ -132,11 +133,9 @@ export default function Home() {
 
         <div className="worldview-grid-3">
           {projectsData.slice(0, 3).map((project) => (
-            <TrackedLink 
+            <Link 
               key={project.id} 
               to={`/projects/${project.id}`} 
-              label={`Project Card: ${project.title}`}
-              category="internal"
               style={{ 
                 backgroundColor: 'rgba(255, 255, 255, 0.02)', 
                 border: '1px solid rgba(255, 255, 255, 0.05)', 
@@ -177,7 +176,7 @@ export default function Home() {
               )}
               
               <div style={{ fontSize: '0.8rem', color: '#8ab4f8', marginTop: '0.2rem' }}>DETAILS &rarr;</div>
-            </TrackedLink>
+            </Link>
           ))}
 
           {/* Full-width "View All" card */}
@@ -206,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* 3. CORE_DIRECTIVES (Technical Skills) */}
-      <section className="section" style={{ marginBottom: '5rem' }}>
+      <section id="home-research" className="section" style={{ marginBottom: '5rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#fac863', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
           RESEARCH INTERESTS
         </h3>

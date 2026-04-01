@@ -1,21 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { educationData } from '../data/education';
-import { trackEvent } from '../components/Analytics';
+import { useScrollTracking, useSectionTracking } from '../components/Analytics';
 
 export default function EducationDetail() {
   const { id } = useParams();
   const degree = educationData.find(d => d.id === id);
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  useEffect(() => {
-    if (degree) {
-      trackEvent(`view_edu_${degree.id.replace(/-/g, '_')}`, {
-        university: degree.university,
-        degree: degree.degree
-      });
-    }
-  }, [degree]);
+  useSectionTracking({
+    'edu-courses': 'Courses',
+    'edu-thesis': 'Thesis',
+    'edu-projects': 'Projects',
+    'edu-activities': 'Activities'
+  }, `Education: ${degree?.degree || 'Unknown'}`);
+  useScrollTracking(degree?.degree || 'Education Detail');
 
   if (!degree) {
     return (
@@ -89,7 +88,7 @@ export default function EducationDetail() {
 
       {/* Coursework Grid */}
       {degree.courses.length > 0 && (
-        <div style={{ marginBottom: '4rem' }}>
+        <div id="edu-courses" style={{ marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '1.3rem', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> 
             KEY COURSEWORK
@@ -149,7 +148,7 @@ export default function EducationDetail() {
 
       {/* Projects List */}
       {degree.projects.length > 0 && (
-        <div>
+        <div id="edu-projects">
           <h2 style={{ fontSize: '1.3rem', color: 'var(--terminal-red)', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> ACADEMIC PROJECTS
           </h2>
@@ -198,7 +197,7 @@ export default function EducationDetail() {
 
       {/* Extracurricular Activities */}
       {degree.activities && degree.activities.length > 0 && (
-        <div style={{ marginTop: '4rem' }}>
+        <div id="edu-activities" style={{ marginTop: '4rem' }}>
           <h2 style={{ fontSize: '1.3rem', margin: '0 0 1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.5 }}>//</span> OTHER ACTIVITIES
           </h2>

@@ -1,22 +1,14 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { useEffect } from 'react';
 import { projectsData } from '../data/projects';
 import { publications } from '../data/learning';
-import { trackEvent } from '../components/Analytics';
+import { useScrollTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = projectsData.find(p => p.id === id);
 
-  useEffect(() => {
-    if (project) {
-      trackEvent(`view_proj_${project.id.replace(/-/g, '_')}`, {
-        title: project.title,
-        company: project.company
-      });
-    }
-  }, [project]);
+  useScrollTracking(project?.title || 'Project Detail');
 
   if (!project) {
     return <Navigate to="/projects" replace />;
@@ -58,7 +50,7 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
+      <div id="proj-overview" style={{ marginTop: '2rem' }}>
         <h2>PROJECT OVERVIEW</h2>
         {project.longDescription.map((desc, i) => (
           <p key={i} style={{ marginTop: '1rem', lineHeight: '1.6' }}>{desc}</p>
@@ -67,7 +59,7 @@ export default function ProjectDetail() {
 
       {/* Project Media */}
       {project.media && project.media.length > 0 && (
-        <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+        <div id="proj-media" style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column', gap: '3rem' }}>
           {project.media.map((item, i) => (
             <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'center' }}>
               {item.type === 'image' ? (
@@ -109,26 +101,31 @@ export default function ProjectDetail() {
         {project.link && (() => {
             const pub = publications.find(p => p.link === project.link);
             if (!pub) return (
-              <div key="pub-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
+              <div id="proj-publication" key="pub-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
                 <h2 style={{ fontSize: '1.3rem', color: '#6699cc', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>Formal Publication</h2>
                 <div style={{ marginTop: '1.2rem' }}>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ 
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#6699cc',
-                    textDecoration: 'none',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.9rem'
-                  }}>
+                  <TrackedLink 
+                    href={project.link} 
+                    label="External Resource"
+                    category="outbound"
+                    context="Project Detail Resource"
+                    style={{ 
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      color: '#6699cc',
+                      textDecoration: 'none',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.9rem'
+                    }}>
                     VIEW EXTERNAL RESOURCE &rarr;
-                  </a>
+                  </TrackedLink>
                 </div>
               </div>
             );
 
             return (
-              <div key="pub-exists" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
+              <div id="proj-publication" key="pub-exists" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #6699cc' }}>
                 <h2 style={{ fontSize: '1.3rem', color: '#6699cc', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>Formal Publication</h2>
                 
                 <div style={{ marginTop: '1.5rem' }}>
@@ -144,6 +141,7 @@ export default function ProjectDetail() {
                      href={pub.link} 
                      label={`Publication: ${pub.title}`}
                      category="outbound"
+                     context="Project Detail Publication"
                      style={{ 
                        display: 'inline-flex',
                        alignItems: 'center',
@@ -161,7 +159,7 @@ export default function ProjectDetail() {
             );
           })()}
 
-        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #fac863' }}>
+        <div id="proj-toolkit" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #fac863' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#fac863', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>toolkit</h2>
           <div style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
             {project.techStack.map((tech, i) => (
@@ -180,7 +178,7 @@ export default function ProjectDetail() {
           </div>
         </div>
         
-        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
+        <div id="proj-challenges" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #ec5f67' }}>
           <h2 style={{ fontSize: '1.3rem', color: '#ec5f67', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>challenges</h2>
           <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {project.challenges.map((challenge, i) => (
@@ -193,7 +191,7 @@ export default function ProjectDetail() {
         </div>
 
         {project.metrics && (
-          <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
+          <div id="proj-metrics" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '1.5rem', borderLeft: '4px solid #99c794' }}>
             <h2 style={{ fontSize: '1.3rem', color: '#99c794', borderBottom: 'none', paddingBottom: 0, marginTop: 0, textTransform: 'uppercase' }}>results & metrics</h2>
             <ul style={{ marginTop: '1.5rem', listStyleType: 'none', paddingLeft: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                {project.metrics.map((metric, i) => (

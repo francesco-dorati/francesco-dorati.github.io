@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import { books, coreIdeas, profileStats, timelineEvents, coreValues, hobbies, aboutContent } from '../data/worldview';
 import { filmsData } from '../data/films';
+import { useSectionTracking } from '../components/Analytics';
 
 export default function About() {
+  useSectionTracking({
+    'about-timeline': 'Timeline', 
+    'about-interests': 'Interests', 
+    'about-cinema': 'Cinema', 
+    'library': 'Library', 
+    'finance': 'Finance', 
+    'philosophy': 'Philosophy'
+  }, 'About');
+
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       <h1 style={{ 
@@ -26,7 +36,7 @@ export default function About() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
         
         {/* 1. SYSTEM_PROFILE (Stats Box -> 3 Cards) */}
-        <div className="worldview-grid-3" style={{ marginBottom: '0rem' }}>
+        <div id="about-profile" className="worldview-grid-3" style={{ marginBottom: '0rem' }}>
           {profileStats.map((stat, i) => (
             <div key={i} style={{ 
               backgroundColor: 'rgba(255, 255, 255, 0.02)', 
@@ -43,7 +53,7 @@ export default function About() {
         </div>
 
         {/* 2. CHRONICLE (Timeline) */}
-        <div>
+        <div id="about-timeline">
           <h3 style={{ fontSize: '1.3rem', color: '#5fb3b3', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
             {/* <span style={{ color: 'var(--text-secondary)', marginRight: '0.5rem' }}>//</span> */}
             {aboutContent.sections.timeline.title}
@@ -75,7 +85,7 @@ export default function About() {
         </div>
 
         {/* 3. INTERESTS */}
-        <div>
+        <div id="about-interests">
           <h3 style={{ fontSize: '1.3rem', color: '#8ab4f8', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
             {/* <span style={{ color: 'var(--text-secondary)', marginRight: '0.5rem' }}>//</span> */}
             {aboutContent.sections.systemIdle.title}
@@ -99,7 +109,7 @@ export default function About() {
         </div>
 
         {/* 4. CINEMA */}
-        <div>
+        <div id="about-cinema">
           <h3 style={{ fontSize: '1.3rem', color: '#fac863', margin: '0 0 1rem 0', fontFamily: 'var(--font-mono)' }}>
             {/* <span style={{ color: 'var(--text-secondary)', marginRight: '0.5rem' }}>//</span> */}
             {aboutContent.sections.cinema.title}
