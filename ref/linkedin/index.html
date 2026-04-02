@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Francesco Dorati...</title>
+  
+  <!-- SEO & Canonical Link -->
+  <link rel="canonical" href="https://francesco-dorati.github.io/" />
+  
+  <!-- Social Media Metadata (Fallback) -->
+  <meta property="og:title" content="Francesco Dorati - Robotics & AI Portfolio" />
+  <meta property="og:description" content="Physical AI, Reinforcement Learning, and Computer Vision for Autonomous Robotics." />
+  <meta property="og:url" content="https://francesco-dorati.github.io/ref/linkedin" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://francesco-dorati.github.io/preview/screenshot.png" />
+  
+  <!-- Twitter Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Francesco Dorati - Robotics & AI Portfolio">
+  <meta name="twitter:description" content="Physical AI, Reinforcement Learning, and Computer Vision for Autonomous Robotics.">
+  <meta name="twitter:image" content="https://francesco-dorati.github.io/preview/screenshot.png">
+
+  <!-- Redirect Logic -->
+  <script>
+    (function() {
+      // We use window.location.search to keep existing params if any,
+      // and append ref=linkedin.
+      const params = new URLSearchParams(window.location.search);
+      params.set('ref', 'linkedin');
+      
+      // Redirect to the root while preserving any existing hash
+      const target = '/' + '?' + params.toString() + window.location.hash;
+      
+      console.log('Redirecting to:', target);
+      window.location.replace(target);
+    })();
+  </script>
+  
+  <!-- Meta Refresh as a fallback for non-JS environments -->
+  <noscript>
+    <meta http-equiv="refresh" content="0;URL='https://francesco-dorati.github.io/?ref=linkedin'" />
+  </noscript>
+</head>
+<body>
+  <p style="font-family: sans-serif; text-align: center; margin-top: 20%; color: #666;">
+    Redirecting to <a href="/" style="color: #0077b5;">francesco-dorati.github.io</a>...
+  </p>
+</body>
+</html>
