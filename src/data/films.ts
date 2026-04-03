@@ -25,12 +25,12 @@ export const filmsData: Film[] = [
     imageUrl: 'films/AN-3.jpg'
   },
   {
-    id: 'the-shining',
-    title: 'The Shining',
+    id: 'barry-lyndon',
+    title: 'Barry Lyndon',
     director: 'Stanley Kubrick',
-    year: 1980,
+    year: 1975,
     description: '',
-    imageUrl: 'films/TS-4.jpg'
+    imageUrl: 'films/BL-2.jpg'
   },
   {
     id: 'taxi-driver',
@@ -39,6 +39,14 @@ export const filmsData: Film[] = [
     year: 1976,
     description: '',
     imageUrl: 'films/TD-3.jpg'
+  },
+  {
+    id: 'the-shining',
+    title: 'The Shining',
+    director: 'Stanley Kubrick',
+    year: 1980,
+    description: '',
+    imageUrl: 'films/TS-4.jpg'
   },
   {
     id: 'grand-budapest-hotel',
@@ -64,14 +72,7 @@ export const filmsData: Film[] = [
     description: '',
     imageUrl: 'films/TGB-2.jpg'
   },
-  {
-    id: 'lost-in-translation',
-    title: 'Lost in Translation',
-    director: 'Sofia Coppola',
-    year: 2003,
-    description: '',
-    imageUrl: 'films/LIT-2.jpg'
-  },
+
 
   {
     id: 'trainspotting',
