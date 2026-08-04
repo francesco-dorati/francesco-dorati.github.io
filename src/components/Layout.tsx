@@ -10,7 +10,8 @@ export default function Layout() {
           { path: '/', label: 'home' },
           { path: '/about', label: 'about' },
           { path: '/learning', label: 'learning' },
-          { path: '/projects', label: 'projects' }
+          { path: '/projects', label: 'projects' },
+          { path: '/publications', label: 'publications' }
         ].map(link => {
           const isActive = link.path === '/' 
             ? location.pathname === '/' 
@@ -21,21 +22,22 @@ export default function Layout() {
               key={link.path} 
               to={link.path} 
               style={{
-                color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
                 textDecoration: 'none',
-                fontSize: '1rem',
+                fontSize: '1.05rem',
+                fontWeight: isActive ? 700 : 500,
                 transition: 'color 0.2s, opacity 0.2s',
                 display: 'flex',
                 alignItems: 'center',
-                opacity: isActive ? 1 : 0.7
+                opacity: isActive ? 1 : 0.85
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.color = 'var(--text-primary)';
                 e.currentTarget.style.opacity = '1';
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.color = isActive ? 'var(--text-primary)' : 'var(--text-muted)';
-                e.currentTarget.style.opacity = isActive ? '1' : '0.7';
+                e.currentTarget.style.color = isActive ? 'var(--text-primary)' : 'var(--text-secondary)';
+                e.currentTarget.style.opacity = isActive ? '1' : '0.85';
               }}
             >
               <span style={{ 

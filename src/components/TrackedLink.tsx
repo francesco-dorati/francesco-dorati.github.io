@@ -11,6 +11,7 @@ interface TrackedLinkProps extends Partial<Omit<LinkProps, 'to'>> {
   target?: string;
   rel?: string;
   context?: string;
+  download?: boolean | string;
 }
 
 /**

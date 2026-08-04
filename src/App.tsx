@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import Publications from './pages/Publications';
 import Films from './pages/Films';
 import Learning from './pages/Learning';
 import EducationDetail from './pages/EducationDetail';
@@ -25,6 +26,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<ProjectDetail />} />
+          <Route path="publications" element={<Publications />} />
           <Route path="films" element={<Films />} />
           <Route path="philosophy" element={<Philosophy />} />
           <Route path="library" element={<Library />} />

@@ -1,20 +1,30 @@
 Home page:
+    - news section, what i was up to recently
+    - make it more catchy for people who only open the first page
+    - add images to the projects 
+    - change the learning part, put the education
     - experiences section
         - list of events i went to and my experience
 
 About Me:
-    - cinema page
-        - list of favourite directors
-    - library page
-        - list of fav books organized by genere
+    only one secion called library with:
+        - cinema page
+            - list of favourite directors
+        - library page
+            - list of fav books organized by genere
+        - music page?
+        - videos, playlists?
     - values page   
         - list of thought and quotes
         - list of inspirational resources 
             - by category (technology etc)
 
 Learning Page:
+    - make the research goals in only one line
 
 Projects Page 
-    - add journaling on some projects (short updates)
-    - exeperiments or partial projects / tests (separate page but not in the bar)
+    # - add journaling on some projects (short updates)
+    - exeperiments or uni/partial projects / tests 
+        - in a different secion (with tags (uni, personal, experiment))
         - automìnomous robot, autonomous plant watering system
+

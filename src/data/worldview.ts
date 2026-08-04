@@ -74,7 +74,7 @@ export const coreIdeas: CoreIdea[] = [
 
 export const profileStats: ProfileStat[] = [
   { label: 'NATIONALITY', value: 'ITA' },
-  { label: 'LOCATION', value: 'Barcelona, Spain' },
+  { label: 'LOCATION', value: 'Milan, Italy' },
   { label: 'UPTIME', value: '22 Years' },
 ];
 
@@ -153,6 +153,7 @@ export interface HomeContent {
   location: string;
   locationEmoji: string;
   education: string;
+  cvUrl: string;
   socialLinks: {
     label: string;
     url: string;
@@ -189,9 +190,10 @@ export const aboutContent: AboutContent = {
 export const homeContent: HomeContent = {
   role: 'Computer Engineer',
   tagline: 'Physical AI & Autonomous Systems',
-  location: 'Barcelona, Spain',
-  locationEmoji: '​🇪🇸',
+  location: 'Milan, Italy',
+  locationEmoji: '​📍',
   education: 'MSc Computer Science and Engineering @ Politecnico di Milano',
+  cvUrl: '/cv/Francesco_Dorati_CV.pdf',
   socialLinks: [
     { label: 'Email', url: 'mailto:fd.francescodorati@gmail.com', type: 'email' },
     { label: 'GitHub', url: 'https://github.com/francesco-dorati', type: 'github' },

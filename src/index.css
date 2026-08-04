@@ -163,17 +163,24 @@ li {
   display: flex;
   gap: 1rem;
   margin-bottom: 2.5rem;
-  padding-top: 1.5rem;
+  padding: 1.1rem 0;
   font-family: var(--font-mono);
   flex-wrap: wrap;
   justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 @media (min-width: 768px) {
   .top-nav {
     gap: 2rem;
     margin-bottom: 4rem;
-    padding-top: 2rem;
+    padding: 1.4rem 0;
     justify-content: flex-start;
   }
 }

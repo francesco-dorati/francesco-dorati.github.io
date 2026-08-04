@@ -127,26 +127,8 @@ export interface Language {
 export const languages: Language[] = [
   { name: 'Italian', level: 'Native', status: 'NATIVE' },
   { name: 'English', level: 'IELTS 7.5 (C1)', status: 'FLUENT' },
-  { name: 'German', level: 'Wishlist / Future', status: 'PLANNED' },
-  { name: 'Chinese', level: 'Wishlist / Future', status: 'PLANNED' },
+  // { name: 'German', level: 'Wishlist / Future', status: 'PLANNED' },
+  { name: 'Chinese', level: 'Currently Learning', status: 'PLANNED' },
 ];
 
-export interface Publication {
-  id: number;
-  title: string;
-  publisher: string;
-  year: string;
-  link?: string;
-  type: 'PAPER' | 'THESIS' | 'REPORT';
-}
-
-export const publications: Publication[] = [
-  { 
-    id: 1, 
-    title: 'Optimizing Initial Path Finding in Informed-RRT* with a Novel Map-Adaptive Sampling Technique', 
-    publisher: '7th Iberian Robotics Conference (ROBOT 2024), IEEE Xplore', 
-    year: '2024',
-    link: 'https://ieeexplore.ieee.org/document/10796871',
-    type: 'PAPER'
-  }
-];
+// Publications moved to src/data/publications.ts

@@ -1,6 +1,9 @@
 import { coreIdeas } from '../data/worldview';
+import { useScrollTracking } from '../components/Analytics';
 
 export default function Philosophy() {
+  useScrollTracking('Worldview');
+
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       <h1 style={{ 

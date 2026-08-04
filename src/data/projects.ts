@@ -2,6 +2,7 @@ export interface ProjectMedia {
   type: 'image' | 'video';
   url: string;
   description?: string;
+  position?: 'before' | 'after'; // relative to the project description text; defaults to 'after'
 }
 
 export interface Project {
@@ -13,87 +14,106 @@ export interface Project {
   location: string;
   longDescription: string[];
   techStack: string[];
-  challenges: string[];
-  link?: string;
+  challenges?: string[];
+  publicationIds?: string[];
   metrics?: string[];
   media?: ProjectMedia[];
   hasPublication?: boolean;
+  titleImage?: string; // thumbnail shown on the Projects list card
 }
 
 export const projectsData: Project[] = [
   {
-    id: "agv-robot",
-    title: "Autonomous Ground Vehicle for Wharehouse",
-    company: "DevNut",
-    date: "Jan 2026 – Present",
-    location: "Remote",
-    shortDescription: "Computer vision-based navigation system for autonomous ground vehicles (AGV), replacing traditional ground-line sensors.",
+    id: "unitree-g1",
+    title: "Humanoid Robot: Perception & Manipulation",
+    company: "Talos Robotics AI",
+    date: "Sept 2025 – Present",
+    location: "Milan, Italy",
+    hasPublication: true,
+    publicationIds: ["eccv2026-affordance-vits", 'icra2026-bayesopt-mpc'],
+    shortDescription: "Building perception and VLA manipulation pipelines for industrial humanoid robots.",
     longDescription: [
-      "I contributed to an R&D project at DevNut (Italian Tech Startup) focused on replacing traditional line-following AGV systems with a flexible, computer-vision-based navigation approach. The goal is to enable dynamic path planning and obstacle avoidance in warehouse environments, eliminating the need for fixed painted floor lines and improving operational adaptability.",
-    
-      "Working in a team of four, I helped design and implement the full navigation stack in simulation using Webots, including control logic, environment modeling, and data logging and visualization tools.",
-    
-      "We implemented a baseline navigation system using LiDAR for obstacle detection and GPS for global localization, combined with a goal-based controller. The robot navigates toward waypoints while dynamically adjusting its trajectory in response to obstacles using a reactive avoidance strategy.",
-    
-      "The next step of the project is to transition away from LiDAR-based perception toward a camera-driven approach, leveraging computer vision techniques such as Visual SLAM to enable richer environmental understanding and more scalable navigation."
+      "This project began at Politecnico di Milano's Automation Engineering Association, working on the **Unitree G1 humanoid** after a collaboration opportunity with content creator Jakidale. Early locomotion work proved hard to stabilize, so the project continued through a collaboration with **Talos Robotics AI**, an early-stage humanoid robotics startup building a platform for training, data collection, and deployment of VLA manipulation policies on industrial humanoid robots.",
+
+      "My focus shifted from locomotion to perception. I built a **multi-task pipeline** that predicts 7-class **affordance masks** and **surface normals** from a single RGB image, using a frozen **DINOv2** backbone with a lightweight trainable decoder. On the UMD benchmark's standard fair evaluation, it reaches **80.3% mean-IoU**, beating the prior state-of-the-art (75.9%) with no object detector, no segmentation mask, and no ground-truth box at inference.",
+
+      "Two findings stood out:\n- **One RGB image can produce an action-relevant representation.** The same lightweight decoder predicts both affordance masks and dense local surface normals, providing a contact region and approach-orientation without an bounding box, or depth input at inference.\n- **Action pretraining creates visual grounding.** In a related study on a humanoid VLA (Ψ0), it genuinely uses visual input to infer task affordances (+10 points over text-only), unlike its underlying vision-language backbone, which largely ignores the image."
+    ],
+    techStack: ["DINOv2", "Affordance Detection", "VLA", "Computer Vision", "Python"],    // challenges: [
+    // "Stabilizing locomotion in a high-DOF humanoid robot with additional manipulation capabilities.",
+    // "Building a zero-shot affordance detection pipeline that generalizes across object categories."
+    // ],
+    metrics: [
+      // "Achieved 100% stability in simulation on flat terrain during the locomotion phase.",
+      "**80.3% mean-IoU** on the official UMD benchmark, **surpassing prior SOTA** (Mask2Former, 75.9%).",
+      "Contributed to work that secured a **€25k industrial research contract** and a **€10k award**."
+    ],
+    titleImage: "/projects/unitree-g1/affordance_architecture.png",
+    media: [
+      // {
+      //   type: "image",
+      //   url: "/projects/unitree-g1/affordance_knife.png",
+      //   // description: "Qualitative demonstration of affordance model performance on a mug"
+      // },
+      {
+        type: "image",
+        url: "/projects/unitree-g1/affordance_architecture.png",
+        description: "Affordance model architecture",
+        position: "after"
+      },
+      {
+        type: "image",
+        url: "/projects/unitree-g1/affordance_comparison.png",
+        description: "Beats prior SOTA (M2F-AFF) on the UMD affordance benchmark",
+        position: "after"
+      },
+      {
+        type: "image",
+        url: "/projects/unitree-g1/affordance_mug.png",
+        description: "Qualitative demonstration of affordance model performance",
+        position: "before"
+      },
+    ]
+  },
+  {
+    id: "agv-robot",
+    titleImage: "/projects/agv-robot/demonstration.mp4",
+    title: "Autonomous Ground Vehicle for Warehouse",
+    company: "DevNut",
+    date: "Jan 2026 – July 2026",
+    location: "Remote",
+    shortDescription: "Modular perception, planning, and control stack for autonomous ground vehicles navigating a warehouse alongside people and forklifts.",
+    longDescription: [
+      "I designed and implemented the navigation stack for an autonomous ground vehicle in a simulated warehouse (Webots), replacing a single-file reactive script with a modular **sense-think-act pipeline**: perception, localization, planning, and motion control, each behind its own interface.",
+
+      "**Localization** fused wheel odometry with GPS and IMU readings using a weighted correction that snaps to the absolute reading only when the two disagree beyond a threshold, bounding drift without discarding the smoother odometry signal. **Global planning** used a visibility-graph over inflated obstacles with A* search, routing around the fixed warehouse layout.",
+
+      "The core of the system was the **local planner**: an occupancy grid rebuilt from lidar at ~10 Hz, where each hit was classified by **map-differencing** against the static layout. Unknown hits were clustered, tracked, and given an estimated velocity, and confirmed moving obstacles had their costmap footprint stamped ahead of their heading so the planner yielded to where they were predicted to go, not just where they were.",
+
+      "Two safety layers sat between the planner and the motors: a two-tier obstacle limiter with hysteresis, and an independent emergency-stop check. The system evolved from two earlier, purely reactive sector-based controllers — robust enough that I kept the original logic as an alternate local-planning strategy rather than discarding it."
     ],
 
-    techStack: ["Python", "Simulation (Webots)", "Autonomous Navigation", "Sensor Integration"],
+    techStack: ["Python", "Visibility Graphs", "Occupancy Grid Mapping", "Object Tracking", "Simulation (Webots)"],
     challenges: [
-      "Overcoming local minima issues in purely reactive navigation systems.",
-      "Designing a flexible navigation pipeline without relying on predefined infrastructure.",
-      "Building a realistic simulation environment for testing navigation strategies."
+      "Separating static structure from moving obstacles reliably, so a noisy lidar reading is never mistaken for permanent map geometry.",
+      "Predicting where a moving obstacle will be, without overreacting to momentary or lateral detections.",
+      "Bounding localization drift with only GPS and odometry as references, with no third source to arbitrate a large GPS error."
     ],
     metrics: [
-      "Implemented end-to-end autonomous navigation pipeline in simulation.",
-      "Achieved reliable waypoint tracking with dynamic obstacle avoidance.",
-      "Developed reusable warehouse simulation framework for testing and evaluation."
+      "Delivered a fully modular navigation architecture: perception, localization, global/local planning, and safety. Replacing a single-file reactive script.",
     ],
     media: [
       {
         type: "video",
         url: "/projects/agv-robot/demonstration.mp4",
-        description: "Simulation of the current navigation system (5x speedup)"
+        description: "Simulation of an earlier version of the navigation system (5x speedup)"
       }
     ],
-  },
-  {
-    id: "unitree-g1",
-    title: "Humanoid Robot",
-    company: "AEA PoliMi",
-    date: "Sept 2025 – Present",
-    location: "Milan, Italy",
-    hasPublication: false,
-    shortDescription: "Implementing state-of-the-art RL approaches for Unitree G1, focusing locomotion models using imitation learning.",
-    longDescription: [
-      "As part of a newly formed research initiative at Politecnico di Milano, I joined the ML/RL team working on the Unitree G1 humanoid robot after being selected through prior contributions. The project originated from a collaboration opportunity with content creator Jakidale, who had recently acquired the platform.",
-    
-      "Given the early-stage nature of the project, I contributed to defining the technical direction by reviewing state-of-the-art reinforcement learning approaches for locomotion and loco-manipulation. My focus evolved toward developing robust locomotion policies capable of handling uneven terrain and external disturbances.",
-    
-      "I initially explored the VideoMimic framework from UC Berkeley, which conditions locomotion policies on LiDAR-based perception. However, due to instability introduced by the robot’s high degrees of freedom and dexterous hands, I decided to redesign the pipeline from scratch, independently implementing and training a new locomotion policy without relying on the original codebase."
-  
-    ],
-    techStack: ["Reinforcement Learning", "Humanoid Locomotion", "Simulation (Isaac Sim / MuJoCo)", "Imitation Learning", "Python"],
-    challenges: [
-      "Stabilizing locomotion in a high-DOF humanoid robot with additional manipulation capabilities.",
-      "Adapting perception-conditioned policies to work reliably without existing frameworks.",
-      "Operating in an early-stage project with undefined roles and evolving objectives."
-    ],
-    metrics: [
-      "Achieved 100% stability in simulation on flat terrain.",
-      "Maintained stability under lateral perturbations without falling."
-    ],
-    media: [
-      {
-        type: "video",
-        url: "/projects/unitree-g1/pushes.mp4",
-        description: "Simulation of basic locomotion with 1.5 m/s pushes"
-      }
-    ]
   },
   {
     id: "falco-drone",
     title: "FALCO Autonomous Drone",
+    titleImage: "/projects/falco-drone/planning_demo.mp4",
     company: "AEA PoliMi",
     date: "Nov 2023 – Feb 2025",
     location: "Milan, Italy",
@@ -101,8 +121,8 @@ export const projectsData: Project[] = [
     "shortDescription": "Developed a C++ path planning algorithm for autonomous drone navigation in complex urban environments.",
     "longDescription": [
       "As part of the FALCO autonomous drone project at Politecnico di Milano, I worked in a three-person software team to develop a path planning algorithm for dense urban navigation, generating collision-free trajectories from point cloud data.",
-      "Starting from the state-of-the-art Informed RRT*, we identified a major bottleneck in initial path discovery due to uniform sampling. We designed a probabilistic ellipsoid sampling strategy using an exponential distribution along the start–goal axis to focus exploration on more promising regions.",
-      "We further implemented an adaptive version that dynamically adjusts sampling based on obstacle density, significantly improving efficiency and robustness across various environments."
+      "Starting from the state-of-the-art **Informed RRT***, we identified a major bottleneck in initial path discovery due to uniform sampling. We designed a **probabilistic ellipsoid sampling strategy** using an exponential distribution along the start–goal axis to focus exploration on more promising regions.",
+      "We further implemented an **adaptive version** that dynamically adjusts sampling based on obstacle density, significantly improving efficiency and robustness across various environments."
     ],
     techStack: ["C++", "Python", "Motion Planning", "Informed-RRT*", "Algorithm Optimization"],
     challenges: [
@@ -110,16 +130,17 @@ export const projectsData: Project[] = [
       "Reducing computational and memory overhead of sampling-based planners."
     ],
     metrics: [
-      "85% faster initial path discovery compared to baseline Informed-RRT*.",
-      "78% lower memory usage during the search phase.",
-      "Work published at IEEE ROBOT2024."
+      "**85% faster** initial path discovery compared to baseline Informed-RRT*.",
+      "**78% reduction** in node count compared to baseline Informed-RRT*."
     ],
-    link: "https://ieeexplore.ieee.org/document/10796871",
+    publicationIds: ["robot2024-informed-rrt"],
     media: [
       {
         type: "video",
         url: "/projects/falco-drone/planning_demo.mp4",
-        description: "Visualization of the planning algorithm in a 2D environment"
+        description: "Visualization of the planning algorithm in a 2D environment",
+        position: "before"
+
       }
     ]
   }

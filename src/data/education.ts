@@ -246,6 +246,19 @@ export interface Program {
 }
 
 export const programs: Program[] = [
+    {
+    id: 'intelligent-robotics-summer-school',
+    name: 'Intelligent Robotics Summer School',
+    institution: 'Beijing Institute of Technology',
+    duration: 'July 2026',
+    location: 'Zhuhai, China',
+    // website: '', // TODO: add if there's a program page
+    description: '', // TODO: write the full story here (Agibot visit, etc.) — this is what shows on the program's own page
+    shortDescription: '', // TODO: one-line summary shown on the Learning page card
+    // timeline: [],
+    // activities: [],
+    // projects: []
+  },
   {
     id: 'unitech',
     name: 'UNITECH International Program',
@@ -283,11 +296,12 @@ export const programs: Program[] = [
     description: 'Intensive 7‑week student entrepreneurship program by the Tech Europe Foundation in collaboration with Università Bocconi and Politecnico di Milano. It supports early‑stage ideas with training, mentorship from experienced founders, and practical tools to develop a business concept. Received a €2,000 grant and the chance to pitch at a final Demo Day in front of professionals and investors.  ',
     shortDescription: '7‑week student program to test startup ideas with mentorship, funding, workshops, and a demo day to help launch real startups.',
     projects: [
-      { 
-        title: 'Organic Home Intelligence', 
+      {
+        title: 'Organic Home Intelligence',
         subtitle: 'Startup Idea',
-        description: 'Privacy-first home automation ecosystem that runs 100% locally. Leveraging a multimodal AI pipeline that combines IR computer vision with localized LLMs to detect human behaviors and context.' 
+        description: 'Privacy-first home automation ecosystem that runs 100% locally. Leveraging a multimodal AI pipeline that combines IR computer vision with localized LLMs to detect human behaviors and context.'
       }
     ]
-  }
+  },
+
 ];

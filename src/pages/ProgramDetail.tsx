@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { programs } from '../data/education';
-import { useScrollTracking, useSectionTracking } from '../components/Analytics';
+import { useScrollTracking, useSectionTracking, trackEvent } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
+import BackButton from '../components/BackButton';
 
 export default function ProgramDetail() {
   const { id } = useParams();
@@ -29,21 +30,7 @@ export default function ProgramDetail() {
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
       
       {/* Back Button */}
-      <Link to="/learning" style={{ 
-        display: 'inline-flex', 
-        alignItems: 'center',
-        gap: '0.5rem',
-        marginBottom: '2.5rem', 
-        color: 'var(--text-muted)',
-        fontFamily: 'var(--font-mono)',
-        textDecoration: 'none',
-        fontSize: '0.9rem',
-        transition: 'color 0.2s'
-      }}
-      onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
-      onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
-        <span>&larr;</span> cd ../learning
-      </Link>
+      <BackButton to="/learning" label="Back to Learning" />
 
       {/* Header Block */}
       <div style={{ marginBottom: '3.5rem', borderBottom: '1px dashed rgba(255,255,255,0.1)', paddingBottom: '2rem' }}>
@@ -186,7 +173,10 @@ export default function ProgramDetail() {
           
           {program.activities && program.activities.length > 4 && (
             <button 
-              onClick={() => setShowAllActivities(!showAllActivities)}
+              onClick={() => {
+                trackEvent(showAllActivities ? 'Collapse: Program Activities' : 'Expand: Program Activities');
+                setShowAllActivities(!showAllActivities);
+              }}
               style={{
                 marginTop: '1.5rem',
                 background: 'none',

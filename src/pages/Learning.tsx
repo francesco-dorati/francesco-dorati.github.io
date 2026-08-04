@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { educationData, programs } from '../data/education';
-import { currentFocus, exploring, onlineCourses, techStack, languages, publications } from '../data/learning';
-import { useSectionTracking } from '../components/Analytics';
+import { onlineCourses, techStack, languages } from '../data/learning';
+import { useSectionTracking, useScrollTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 
 export default function Learning() {
   useSectionTracking({
-    'learn-education': 'Degrees', 
-    'learn-publications': 'Publications', 
-    'learn-programs': 'Programs', 
-    'learn-courses': 'Courses', 
+    'learn-education': 'Degrees',
+    'learn-programs': 'Programs',
+    'learn-courses': 'Courses',
     'learn-tech': 'Stack'
   }, 'Learning');
+  useScrollTracking('Learning');
 
   return (
     <div className="section" style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>
@@ -31,7 +31,7 @@ export default function Learning() {
         <span className="blinking-cursor" style={{ marginLeft: '0.5rem' }}></span>
       </h1>
       
-      <div style={{ marginBottom: '4rem', maxWidth: '700px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div style={{ marginBottom: '2rem', maxWidth: '700px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         {/* <div>
           <p style={{ margin: '0', opacity: 0.9, lineHeight: '1.6', fontSize: '1.15rem', color: 'var(--text-primary)', fontStyle: 'italic', fontFamily: 'var(--font-mono)' }}>
             "As long as I’m learning something, I figure I’m doing OK — it’s a decent day."
@@ -49,70 +49,6 @@ export default function Learning() {
           </p>
         </div>
       </div>
-
-      {/* 2. Expertise & Research Interests */}
-      <div id="learn-interests" style={{ marginBottom: '4rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#6699cc', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
-          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
-          RESEARCH INTERESTS
-        </h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-          gap: '1.5rem' 
-        }}>
-          {currentFocus.map(focus => (
-            <div key={focus.id} style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.02)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-              borderRadius: '8px',
-              padding: '1.5rem',
-              transition: 'transform 0.2s, borderColor 0.2s',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.8rem'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.borderColor = 'rgba(102, 153, 204, 0.3)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.2rem' }}>
-                <span style={{ fontSize: '1.8rem' }}>{focus.icon}</span>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '1.1rem' }}>{focus.title}</strong>
-              </div>
-              <ul style={{ 
-                margin: 0, 
-                padding: 0, 
-                listStyle: 'none', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '0.4rem' 
-              }}>
-                {focus.bullets.map((bullet, i) => (
-                  <li key={i} style={{ 
-                    color: 'var(--text-secondary)', 
-                    fontSize: '0.85rem', 
-                    lineHeight: '1.4',
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '0.6rem'
-                  }}>
-                    <span style={{ color: '#6699cc', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>&gt;</span>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
-
-      
 
       {/* 3. Formal Education Section */}
       <div id="learn-education" style={{ marginBottom: '4rem' }}>
@@ -178,80 +114,6 @@ export default function Learning() {
         </div>
       </div>
 
-      {/* 2.6 Research & Publications */}
-      <div id="learn-publications" style={{ marginBottom: '4rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#6699cc', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
-          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
-          RESEARCH & PUBLICATIONS
-        </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {publications.map((pub, i) => (
-            <TrackedLink 
-              key={i} 
-              href={pub.link || '#'}
-              label={`Publication: ${pub.title}`}
-              category="outbound"
-              context="Learning Publications"
-              className="publication-card"
-              style={{ 
-                padding: '1.2rem',
-                backgroundColor: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.05)',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                display: 'block'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'rgba(102, 153, 204, 0.3)';
-                e.currentTarget.style.backgroundColor = 'rgba(102, 153, 204, 0.03)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
-              }}
-            >
-              <div className="publication-info">
-                <span style={{ 
-                  fontSize: '0.65rem',
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '4px',
-                  backgroundColor: 'rgba(102, 153, 204, 0.1)',
-                  color: '#6699cc',
-                  border: '1px solid rgba(102, 153, 204, 0.2)',
-                  fontFamily: 'var(--font-mono)',
-                  letterSpacing: '0.05em',
-                  minWidth: '70px',
-                  textAlign: 'center',
-                  marginTop: '0.2rem'
-                }}>
-                  {pub.type}
-                </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                  <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', lineHeight: '1.4' }}>{pub.title}</div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{pub.publisher}</div>
-                </div>
-              </div>
-              <div 
-                className="publication-year"
-                style={{ 
-                  fontFamily: 'var(--font-mono)', 
-                  color: 'var(--text-muted)', 
-                  fontSize: '0.9rem',
-                  opacity: 0.8,
-                  marginTop: '0.2rem'
-                }}
-              >
-                [{pub.year}]
-              </div>
-            </TrackedLink>
-          ))}
-        </div>
-      </div>
-
       {/* 2.5 Programs & Fellowships Section */}
       <div id="learn-programs" style={{ marginBottom: '4rem' }}>
         <h3 style={{ fontSize: '1.2rem', color: '#fac863', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
@@ -297,136 +159,6 @@ export default function Learning() {
         </div>
       </div>
         
-      {/* 5. Exploration & Future Log */}
-      <div style={{ marginBottom: '4rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#99c794', margin: '0 0 2rem 0', fontFamily: 'var(--font-mono)' }}>
-          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
-          CURRENTLY LEARNING
-        </h3>
-        
-        <div style={{ 
-          fontFamily: 'var(--font-mono)', 
-          fontSize: '0.9rem', 
-          backgroundColor: 'rgba(0,0,0,0.1)', 
-          padding: '2rem', 
-          borderRadius: '12px',
-          border: '1px solid rgba(255,255,255,0.05)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem'
-        }}>
-          {exploring.map((item) => (
-            <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <span style={{ 
-                    fontSize: '0.75rem',
-                    padding: '0.2rem 0.6rem',
-                    borderRadius: '4px',
-                    backgroundColor: item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.1)' : 'rgba(255,255,255,0.05)',
-                    color: item.status === 'LEARNING' ? '#fac863' : 'var(--text-muted)',
-                    border: `1px solid ${item.status === 'LEARNING' ? 'rgba(250, 200, 99, 0.2)' : 'rgba(255,255,255,0.1)'}`
-                  }}>
-                    {item.status}
-                  </span>
-                  <span style={{ color: 'var(--text-primary)', fontSize: '1rem' }}>{item.title}</span>
-                  {item.source && (
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', opacity: 0.8, fontFamily: 'var(--font-mono)' }}>
-                      // {item.source}
-                    </span>
-                  )}
-                </div>
-                {item.status === 'LEARNING' && (
-                  <span style={{ color: '#99c794', fontWeight: 'bold' }}>{item.progress}%</span>
-                )}
-              </div>
-              
-              {item.status === 'LEARNING' && (
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', opacity: 0.9 }}>
-                  <span style={{ color: 'var(--text-muted)' }}>[</span>
-                  <div style={{ flex: 1, height: '6px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden', display: 'flex' }}>
-                    <div style={{ 
-                      width: `${item.progress}%`, 
-                      height: '100%', 
-                      backgroundColor: '#99c794',
-                      boxShadow: '0 0 10px rgba(153, 199, 148, 0.3)'
-                    }} />
-                  </div>
-                  <span style={{ color: 'var(--text-muted)' }}>]</span>
-                </div>
-              )}
-              
-              {item.status !== 'LEARNING' && (
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic', marginLeft: '0.5rem' }}>
-                  {'>>'} STATUS_QUEUED: Awaiting resource allocation...
-                </div>
-              )}
-            </div>
-          ))}
-          
-
-        </div>
-      </div>
-      
-
-
-
-      {/* 2.6 Online Courses & Certifications Section */}
-      <div id="learn-courses" style={{ marginBottom: '4rem' }}>
-        <h3 style={{ fontSize: '1.2rem', color: '#c594c5', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
-          {/* <span style={{ color: 'var(--text-muted)', marginRight: '0.5rem' }}>//</span> */}
-          ONLINE COURSES & CERTIFICATIONS
-        </h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-          gap: '1rem' 
-        }}>
-          {onlineCourses.map(course => (
-            <TrackedLink 
-              key={course.id} 
-              href={course.url} 
-              label={`Course: ${course.title}`}
-              category="outbound"
-              context="Learning Courses"
-              style={{ 
-                backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-                border: '1px solid rgba(255, 255, 255, 0.05)', 
-                borderRadius: '8px',
-                padding: '1.2rem',
-                transition: 'all 0.2s ease',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.8rem',
-                textDecoration: 'none',
-                cursor: 'pointer'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'rgba(197, 148, 197, 0.3)';
-                e.currentTarget.style.backgroundColor = 'rgba(197, 148, 197, 0.03)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.8rem' }}>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.4' }}>{course.title}</strong>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{course.date}</span>
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <span style={{ color: '#c594c5', opacity: 0.8 }}>@</span> {course.platform}
-              </div>
-            </TrackedLink>
-          ))}
-        </div>
-      </div>
-
-
-
-
 
       {/* 5. Tech Stack Section */}
       <div id="learn-tech" style={{ marginBottom: '4rem' }}>
@@ -471,7 +203,57 @@ export default function Learning() {
         </div>
       </div>
 
-      
+      {/* 2.6 Online Courses & Certifications Section */}
+      <div id="learn-courses" style={{ marginBottom: '4rem' }}>
+        <h3 style={{ fontSize: '1.2rem', color: '#c594c5', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-mono)' }}>
+          ONLINE COURSES & CERTIFICATIONS
+        </h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: '1rem'
+        }}>
+          {onlineCourses.map(course => (
+            <TrackedLink
+              key={course.id}
+              href={course.url}
+              label={`Course: ${course.title}`}
+              category="outbound"
+              context="Learning Courses"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                borderRadius: '8px',
+                padding: '1.2rem',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.8rem',
+                textDecoration: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.borderColor = 'rgba(197, 148, 197, 0.3)';
+                e.currentTarget.style.backgroundColor = 'rgba(197, 148, 197, 0.03)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.8rem' }}>
+                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.4' }}>{course.title}</strong>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{course.date}</span>
+              </div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ color: '#c594c5', opacity: 0.8 }}>@</span> {course.platform}
+              </div>
+            </TrackedLink>
+          ))}
+        </div>
+      </div>
 
       {/* 6. Human Languages Section */}
       <div style={{ paddingBottom: '4rem' }}>
