@@ -1,16 +1,10 @@
 import { Link } from 'react-router-dom';
 import { educationData, programs } from '../data/education';
 import { onlineCourses, techStack, languages } from '../data/learning';
-import { useSectionTracking, useScrollTracking } from '../components/Analytics';
+import { useScrollTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 
 export default function Learning() {
-  useSectionTracking({
-    'learn-education': 'Degrees',
-    'learn-programs': 'Programs',
-    'learn-courses': 'Courses',
-    'learn-tech': 'Stack'
-  }, 'Learning');
   useScrollTracking('Learning');
 
   return (

@@ -1,7 +1,7 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { projectsData, type ProjectMedia } from '../data/projects';
 import { publications } from '../data/publications';
-import { useScrollTracking, useSectionTracking } from '../components/Analytics';
+import { useScrollTracking } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 import MarkdownLite, { MarkdownInline } from '../components/MarkdownLite';
 import BackButton from '../components/BackButton';
@@ -12,12 +12,6 @@ export default function ProjectDetail() {
   const project = projectsData.find(p => p.id === id);
 
   useScrollTracking(project?.title || 'Project Detail');
-  useSectionTracking({
-    'proj-overview': 'Overview',
-    'proj-publication': 'Publication',
-    'proj-challenges': 'Challenges',
-    'proj-metrics': 'Metrics'
-  }, `Project: ${project?.title || 'Unknown'}`);
 
   if (!project) {
     return <Navigate to="/projects" replace />;

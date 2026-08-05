@@ -1,17 +1,9 @@
 import { Link } from 'react-router-dom';
 import { books, coreIdeas, profileStats, timelineEvents, coreValues, hobbies, aboutContent } from '../data/worldview';
 import { filmsData } from '../data/films';
-import { useSectionTracking, useScrollTracking } from '../components/Analytics';
+import { useScrollTracking } from '../components/Analytics';
 
 export default function About() {
-  useSectionTracking({
-    'about-timeline': 'Timeline',
-    'about-interests': 'Interests',
-    'about-cinema': 'Cinema',
-    'library': 'Library',
-    'finance': 'Finance',
-    'philosophy': 'Philosophy'
-  }, 'About');
   useScrollTracking('About');
 
   return (

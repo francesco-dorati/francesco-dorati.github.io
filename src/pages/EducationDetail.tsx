@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { educationData } from '../data/education';
-import { useScrollTracking, useSectionTracking, trackEvent } from '../components/Analytics';
+import { useScrollTracking, trackEvent } from '../components/Analytics';
 import BackButton from '../components/BackButton';
 
 export default function EducationDetail() {
@@ -9,12 +9,6 @@ export default function EducationDetail() {
   const degree = educationData.find(d => d.id === id);
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  useSectionTracking({
-    'edu-courses': 'Courses',
-    'edu-thesis': 'Thesis',
-    'edu-projects': 'Projects',
-    'edu-activities': 'Activities'
-  }, `Education: ${degree?.degree || 'Unknown'}`);
   useScrollTracking(degree?.degree || 'Education Detail');
 
   if (!degree) {

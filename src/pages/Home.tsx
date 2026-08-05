@@ -6,17 +6,12 @@ import { publications } from '../data/publications';
 import { newsEntries } from '../data/news';
 import TrackedLink from '../components/TrackedLink';
 import { MarkdownInline } from '../components/MarkdownLite';
-import { useScrollTracking, useSectionTracking, trackEvent } from '../components/Analytics';
+import { useScrollTracking, trackEvent } from '../components/Analytics';
 
 export default function Home() {
   const [showAllNews, setShowAllNews] = useState(false);
 
   useScrollTracking('Home');
-  useSectionTracking({
-    'home-news': 'News',
-    'home-projects': 'Main Projects',
-    'home-publications': 'Publications'
-  }, 'Home');
 
   return (
     <div style={{ animation: 'fadeIn 0.5s ease-in', paddingBottom: '4rem' }}>

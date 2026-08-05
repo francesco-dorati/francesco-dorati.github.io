@@ -11,44 +11,17 @@ declare global {
 }
 
 /**
- * Hook to track when specific sections enter the viewport.
- * Usage: useSectionTracking({ 'proj-toolkit': 'Toolkit' }, 'Drone Project')
- */
-export const useSectionTracking = (sectionMap: Record<string, string>, pageName: string) => {
-  useEffect(() => {
-    const trackedSections = new Set<string>();
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !trackedSections.has(entry.target.id)) {
-          const label = sectionMap[entry.target.id];
-          if (label) {
-            trackEvent(`Scroll: ${pageName} - ${label}`);
-            trackedSections.add(entry.target.id);
-          }
-        }
-      });
-    }, { threshold: 0.2 }); // Trigger when 20% of section is visible
-
-    Object.keys(sectionMap).forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [sectionMap, pageName]);
-};
-
-/**
  * Hook to track scroll depth on a page.
- * Tracks 50% and 100% visibility.
+ * Tracks 50%, 80%, and 100% visibility.
  */
 export const useScrollTracking = (pageTitle: string) => {
   const hasTracked50 = useRef(false);
+  const hasTracked80 = useRef(false);
   const hasTracked100 = useRef(false);
 
   useEffect(() => {
     hasTracked50.current = false;
+    hasTracked80.current = false;
     hasTracked100.current = false;
 
     const handleScroll = () => {
@@ -60,6 +33,11 @@ export const useScrollTracking = (pageTitle: string) => {
       if (scrollPercentage >= 0.5 && !hasTracked50.current) {
         trackEvent(`Read 50%: ${pageTitle}`);
         hasTracked50.current = true;
+      }
+
+      if (scrollPercentage >= 0.8 && !hasTracked80.current) {
+        trackEvent(`Read 80%: ${pageTitle}`);
+        hasTracked80.current = true;
       }
 
       if (scrollPercentage >= 0.95 && !hasTracked100.current) {

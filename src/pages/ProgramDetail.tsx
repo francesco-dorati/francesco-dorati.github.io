@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { programs } from '../data/education';
-import { useScrollTracking, useSectionTracking, trackEvent } from '../components/Analytics';
+import { useScrollTracking, trackEvent } from '../components/Analytics';
 import TrackedLink from '../components/TrackedLink';
 import BackButton from '../components/BackButton';
 
@@ -10,11 +10,6 @@ export default function ProgramDetail() {
   const program = programs.find(p => p.id === id);
   const [showAllActivities, setShowAllActivities] = useState(false);
 
-  useSectionTracking({
-    'prog-journey': 'Journey',
-    'prog-activities': 'Activities',
-    'prog-projects': 'Projects'
-  }, `Program: ${program?.name || 'Unknown'}`);
   useScrollTracking(program?.name || 'Program Detail');
 
   if (!program) {
